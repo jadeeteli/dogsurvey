@@ -990,133 +990,278 @@ const ASIDE_TIPS = [
 const PREGUNTAS = [
   // ─── BLOQUE 1 · Cuéntanos un poco más sobre ti ─────────────────────────
   {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "tuvo_perro",
+    seccion: "Cuéntanos un poco más sobre ti",
+    seccionCorta: "Sobre ti",
+    key: "tuvo_perro",
     titulo: "¿Como adulto has tenido perro antes?",
     desc: "Tu experiencia previa determina qué razas te resultarán más cómodas de gestionar.",
-    hasIcon: false, cols: 1,
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Sí, tengo experiencia", sub: "He convivido con perros como propietario principal",             value: "experimentado" },
-      { label: "Primera vez",            sub: "Nunca he tenido o solo convivía con el perro de la familia",   value: "primerizo" },
-    ],
-  },
-  {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "actividad",
-    titulo: "¿Qué nivel de energía buscas en tu perro?",
-    desc: "Algunas razas son muy activas y siempre están preparadas para correr, jugar o acompañarte en una nueva aventura. Otras prefieren los paseos tranquilos, los momentos de descanso y disfrutar de tu compañía en casa.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Tranquilo",  sub: "~1 h/día · Paseos cortos y vida en casa",      value: "bajo",  icon: <ActivityIcon level="bajo" /> },
-      { label: "Moderado",   sub: "1–3 h/día · Paseos largos y salidas",           value: "medio", icon: <ActivityIcon level="medio" /> },
-      { label: "Muy activo", sub: "+3 h/día · Deporte y aventura al aire libre",  value: "alto",  icon: <ActivityIcon level="alto" /> },
-    ],
-  },
-  {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "ninos",
-    titulo: "¿Hay niños en casa o los habrá próximamente?",
-    desc: "Algunas razas muestran una paciencia y afecto excepcional con los más pequeños.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, viven en casa",                          value: "convive_siempre" },
-      { label: "Probablemente en los próximos años",          value: "alguna_visita" },
-      { label: "No",                                          value: "sin_ninos" },
-    ],
-  },
-  {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "otros_perros",
-    titulo: "¿Es importante que tu perro se lleve bien con otros animales?",
-    desc: "Si ya tienes o frecuentas otros perros u otras mascotas, la compatibilidad social es fundamental.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, es importante", value: "si" },
-      { label: "No es prioritario", value: NO_IMPORTA },
-    ],
-  },
-  {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "vivienda",
-    titulo: "¿A qué tipo de espacio exterior tendrá acceso tu perro?",
-    desc: "El espacio disponible condiciona el bienestar de muchas razas, especialmente las más activas.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Piso sin jardín",         sub: "Solo paseos para el ejercicio",     value: "piso",             icon: <HouseIcon type="piso" /> },
-      { label: "Casa con jardín pequeño", sub: "Espacio para tomar el sol y jugar", value: "piso_con_terraza", icon: <HouseIcon type="piso_con_terraza" /> },
-      { label: "Casa con jardín amplio",  sub: "Terreno de juego libre",            value: "casa_con_jardin",  icon: <HouseIcon type="casa_con_jardin" /> },
-    ],
-  },
-  {
-    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "alergenico",
-    titulo: "¿Buscas un perro poco alergénico?",
-    desc: "Algunas razas producen menos alérgenos gracias a su tipo de pelo, lo que puede ser útil si alguien en casa es sensible a los perros. Ningún perro es 100% hipoalergénico, pero unas razas sueltan mucho menos pelo y caspa que otras.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, es importante", sub: "Prefiero una raza que suelte poco pelo y caspa.", value: "si" },
-      { label: "No es necesario",   sub: "No es un factor determinante para mí.",           value: "no" },
-      { label: "No lo tengo claro", sub: "Prefiero no descartar razas por este motivo.",     value: NO_IMPORTA },
+      {
+        label: "Sí, tengo experiencia",
+        sub: "He convivido con perros como propietario principal",
+        value: "experimentado",
+      },
+      {
+        label: "Primera vez",
+        sub: "Nunca he tenido o solo convivía con el perro de la familia",
+        value: "primerizo",
+      },
     ],
   },
 
-  // ─── BLOQUE 2 · Características del perro ──────────────────────────────
   {
-    seccion: "Características del perro", seccionCorta: "Características", key: "tamano",
-    titulo: "¿Qué tamaño de perro te gustaría tener?",
-    desc: "El tamaño influye en el espacio que necesita, los costes de alimentación y veterinario, y su adaptación a tu vivienda.",
-    hasIcon: true, cols: 3,
+    seccion: "Cuéntanos un poco más sobre ti",
+    seccionCorta: "Sobre ti",
+    key: "actividad",
+    titulo: "¿Cuál es tu nivel de actividad?",
+    desc: "Tu estilo de vida es uno de los factores más importantes para encontrar una raza compatible.",
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Miniatura", sub: "Menos de 4 kg",    value: "pequeño",    icon: <DogSizeIllustration size="mini" /> },
-      { label: "Mini",      sub: "De 4 a 10 kg",     value: "pequeño",    icon: <DogSizeIllustration size="pequeno" /> },
-      { label: "Mediano",   sub: "De 11 a 25 kg",    value: "mediano",    icon: <DogSizeIllustration size="mediano" /> },
-      { label: "Maxi",      sub: "De 26 a 44 kg",    value: "grande",     icon: <DogSizeIllustration size="grande" /> },
-      { label: "Gigante",   sub: "Más de 45 kg",     value: "muy_grande", icon: <DogSizeIllustration size="muygrande" /> },
-      { label: "No importa",sub: "Cualquier tamaño", value: NO_IMPORTA,   icon: <DogSizeIllustration size="noImporta" /> },
+      {
+        label: "Tranquilo",
+        sub: "Prefiero un ritmo relajado",
+        value: "bajo",
+        icon: <ActivityIcon level="bajo" />,
+      },
+      {
+        label: "Moderado",
+        sub: "Me gusta mantenerme activo",
+        value: "medio",
+        icon: <ActivityIcon level="medio" />,
+      },
+      {
+        label: "Muy activo",
+        sub: "Hago deporte o actividades al aire libre con frecuencia",
+        value: "alto",
+        icon: <ActivityIcon level="alto" />,
+      },
     ],
   },
+
   {
-    seccion: "Características del perro", seccionCorta: "Características", key: "temperamento",
-    titulo: "¿Qué temperamento buscas en tu perro?",
-    desc: "El carácter de la raza influirá en la convivencia diaria y en cómo interactúa con tu entorno.",
-    hasIcon: false, cols: 2,
+    seccion: "Cuéntanos un poco más sobre ti",
+    seccionCorta: "Sobre ti",
+    key: "ninos",
+    titulo: "¿Hay niños en casa o los habrá próximamente?",
+    desc: "Algunas razas muestran una paciencia y afecto excepcional con los más pequeños.",
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Amistoso y sociable", sub: "Abierto con todo el mundo",            value: "amistoso" },
-      { label: "Independiente",       sub: "Sin necesidad constante de atención",  value: "independiente" },
-      { label: "Protector",           sub: "Leal y vigilante con su familia",      value: "protector" },
-      { label: "Tímido o reservado",  sub: "Selectivo con las personas",           value: "timido" },
+      {
+        label: "Sí, viven en casa",
+        value: "convive_siempre",
+      },
+      {
+        label: "Probablemente en los próximos años",
+        value: "alguna_visita",
+      },
+      {
+        label: "No",
+        value: "sin_ninos",
+      },
     ],
   },
+
   {
-    seccion: "Características del perro", seccionCorta: "Cuidados", key: "entrenamiento",
+    seccion: "Cuéntanos un poco más sobre ti",
+    seccionCorta: "Sobre ti",
+    key: "vivienda",
+    titulo: "¿Qué tipo de vivienda tienes?",
+    desc: "El tipo de vivienda ayuda a determinar qué razas se adaptan mejor a tu entorno.",
+    hasIcon: false,
+    cols: 1,
+    opciones: [
+      {
+        label: "Piso",
+        sub: "Sin jardín",
+        value: "piso",
+        icon: <HouseIcon type="piso" />,
+      },
+      {
+        label: "Casa con jardín pequeño",
+        sub: "Espacio exterior reducido",
+        value: "piso_con_terraza",
+        icon: <HouseIcon type="piso_con_terraza" />,
+      },
+      {
+        label: "Casa con jardín amplio",
+        sub: "Gran espacio exterior",
+        value: "casa_con_jardin",
+        icon: <HouseIcon type="casa_con_jardin" />,
+      },
+    ],
+  },
+
+  {
+    seccion: "Cuéntanos un poco más sobre ti",
+    seccionCorta: "Sobre ti",
+    key: "alergenico",
+    titulo: "¿Buscas un perro poco alergénico?",
+    desc: "Algunas razas producen menos alérgenos gracias a su tipo de pelo. Ningún perro es 100% hipoalergénico, pero algunas razas sueltan mucho menos pelo y caspa.",
+    hasIcon: false,
+    cols: 1,
+    opciones: [
+      {
+        label: "Sí, es importante",
+        sub: "Prefiero una raza que suelte poco pelo y caspa.",
+        value: "si",
+      },
+      {
+        label: "No es necesario",
+        sub: "No es un factor determinante para mí.",
+        value: "no",
+      },
+      {
+        label: "No lo tengo claro",
+        sub: "Prefiero no descartar razas por este motivo.",
+        value: NO_IMPORTA,
+      },
+    ],
+  },
+
+   // ─── BLOQUE 2 · Características del perro ──────────────────────────────
+  {
+    seccion: "Características del perro",
+    seccionCorta: "Características",
+    key: "tamano",
+    titulo: "¿Qué tamaño de perro encaja mejor en tu vida?",
+    hasIcon: true,
+    cols: 3,
+    opciones: [
+      { label: "Miniatura", sub: "Menos de 4 kg", value: "pequeño", icon: <DogSizeIllustration size="mini" /> },
+      { label: "Mini", sub: "De 4 a 10 kg", value: "pequeño", icon: <DogSizeIllustration size="pequeno" /> },
+      { label: "Mediano", sub: "De 11 a 25 kg", value: "mediano", icon: <DogSizeIllustration size="mediano" /> },
+      { label: "Maxi", sub: "De 26 a 44 kg", value: "grande", icon: <DogSizeIllustration size="grande" /> },
+      { label: "Gigante", sub: "Más de 45 kg", value: "muy_grande", icon: <DogSizeIllustration size="muygrande" /> },
+      { label: "No importa", sub: "Cualquier tamaño", value: NO_IMPORTA, icon: <DogSizeIllustration size="noImporta" /> },
+    ],
+  },
+
+  {
+    seccion: "Características del perro",
+    seccionCorta: "Características",
+    key: "actividadPersona",
+    titulo: "¿Qué nivel de energía buscas en tu perro?",
+    desc: "Algunas razas disfrutan de una vida muy activa mientras que otras prefieren un ritmo más tranquilo.",
+    hasIcon: false,
+    cols: 1,
+    opciones: [
+      {
+        label: "Tranquilo",
+        sub: "Paseos relajados y vida calmada",
+        value: "bajo",
+        icon: <ActivityIcon level="bajo" />,
+      },
+      {
+        label: "Moderado",
+        sub: "Un equilibrio entre actividad y descanso",
+        value: "medio",
+        icon: <ActivityIcon level="medio" />,
+      },
+      {
+        label: "Muy activo",
+        sub: "Deporte, excursiones y mucha actividad",
+        value: "alto",
+        icon: <ActivityIcon level="alto" />,
+      },
+    ],
+  },
+
+
+  {
+    seccion: "Características del perro",
+    seccionCorta: "Cuidados",
+    key: "entrenamiento",
     titulo: "¿Qué facilidad de aprendizaje buscas en tu perro?",
-    desc: "Algunas razas disfrutan aprendiendo y colaborando con sus personas, mientras que otras tienen un carácter más independiente y necesitan un enfoque educativo paciente y constante.",
-    hasIcon: false, cols: 1,
+    desc: "Algunas razas aprenden con mucha facilidad mientras que otras requieren un enfoque más paciente.",
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Alto",   sub: "Le encantará aprender y hacer actividades contigo.",        value: "muy_alto" },
-      { label: "Medio",  sub: "Disfrutará participando con cierta frecuencia.",            value: "alto" },
-      { label: "Normal", sub: "Se adaptará a actividades sencillas y ocasionales.",         value: "normal" },
-      { label: "Bajo",   sub: "Preferirá una rutina tranquila y más independiente.",        value: "bajo" },
+      {
+        label: "Alta",
+        sub: "Disfruta aprendiendo constantemente",
+        value: "muy_alto",
+      },
+      {
+        label: "Media",
+        sub: "Aprende con práctica y constancia",
+        value: "alto",
+      },
+      {
+        label: "Normal",
+        sub: "Aprendizaje equilibrado",
+        value: "normal",
+      },
+      {
+        label: "Baja",
+        sub: "Más independiente",
+        value: "bajo",
+      },
     ],
   },
+
   {
-    seccion: "Características del perro", seccionCorta: "Cuidados", key: "ladridos",
-    titulo: "¿Te molesta que tu perro sea comunicativo?",
-    desc: "Algunas razas ladran con frecuencia ante cualquier estímulo, mientras que otras solo lo hacen en momentos concretos. Incluso las razas consideradas poco ladradoras pueden expresarse mediante otros sonidos.",
-    hasIcon: false, cols: 1,
+    seccion: "Características del perro",
+    seccionCorta: "Cuidados",
+    key: "ladridos",
+    titulo: "¿Qué nivel de ladridos prefieres?",
+    desc: "Algunas razas son más comunicativas que otras.",
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Muy poquito",      sub: "Mejor si se hace notar sin montar un concierto.", value: "bajo" },
-      { label: "De vez en cuando", sub: "Algún ladrido está bien.",                        value: "medio" },
-      { label: "Bastante",         sub: "No me importa que tenga muchas cosas que contar.", value: "alto" },
-      { label: "Mucho",            sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
+      {
+        label: "Pocos ladridos",
+        sub: "Prefiero un perro tranquilo",
+        value: "bajo",
+      },
+      {
+        label: "Nivel medio",
+        sub: "Algún ladrido ocasional",
+        value: "medio",
+      },
+      {
+        label: "No me importa",
+        sub: "Puede ser bastante comunicativo",
+        value: "alto",
+      },
     ],
   },
+
   {
-    seccion: "Características del perro", seccionCorta: "Cuidados", key: "aseo",
+    seccion: "Características del perro",
+    seccionCorta: "Cuidados",
+    key: "aseo",
     titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
-    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados, tanto en casa como con ayuda de un profesional. Ten en cuenta también cuánto te importa encontrar pelitos por casa, ya que algunas razas mudan mucho más que otras.",
-    hasIcon: false, cols: 1,
+    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados.",
+    hasIcon: false,
+    cols: 1,
     opciones: [
-      { label: "Lo esencial",       sub: "Cuidados sencillos y rápidos; prefiero los pelos en el perro, no en el sofá.",             value: "mensual" },
-      { label: "De vez en cuando",  sub: "Un rato cada semana; algún pelito por casa no me preocupa.",                               value: "semanal" },
-      { label: "Con frecuencia",    sub: "Disfruto cepillándolo y cuidando su manto; puedo convivir con algo más de limpieza.",       value: "frecuente" },
-      { label: "Todo lo necesario", sub: "En casa o en la peluquería, tendrá sus cuidados al día; ¡los pelos forman parte de la familia!", value: "diario" },
+      {
+        label: "Lo esencial",
+        sub: "Cuidados sencillos",
+        value: "mensual",
+      },
+      {
+        label: "De vez en cuando",
+        sub: "Cepillado semanal",
+        value: "semanal",
+      },
+      {
+        label: "Con frecuencia",
+        sub: "Cepillado frecuente",
+        value: "frecuente",
+      },
+      {
+        label: "Todo lo necesario",
+        sub: "Estoy dispuesto a dedicarle todo el tiempo que necesite",
+        value: "diario",
+      },
     ],
   },
+
 ];
 
 const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro"];
