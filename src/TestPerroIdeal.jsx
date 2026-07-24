@@ -652,7 +652,7 @@ function caracteristicasRaza(raza) {
 const PESOS = {
   tamano: 4, actividad: 5, ninos: 5, temperamento: 3,
   aseo: 3, salud: 2, entrenamiento: 2, otros_perros: 3,
-  tuvo_perro: 1, vivienda: 4,
+  tuvo_perro: 1, vivienda: 4, ladridos: 2, mudaPelo: 2,
 };
 
 // ─── Razas destacadas ───────────────────────────────────────────────────────
@@ -704,6 +704,8 @@ const ETIQ_VIVIENDA = {
   piso: "Piso sin jardín", piso_con_terraza: "Casa sin jardín o con jardín pequeño",
   casa_con_jardin: "Casa con jardín amplio", indiferente: "Cualquier vivienda",
 };
+const ETIQ_LADRIDOS = { bajo: "Bajo", medio: "Medio", alto: "Alto" };
+const ETIQ_MUDA = { sin_muda: "Prácticamente nula", baja: "Baja", media: "Media", alta: "Alta" };
 
 function nivelVeterinario(raza) {
   const muda = { sin_muda: 0, baja: 0.5, media: 1, alta: 1.5 }[raza.mudaPelo] ?? 1;
@@ -765,6 +767,8 @@ function construirFilasResultado(raza, resp) {
     cuidados: [
       { label: "Necesidades educativas", valor: ETIQ_ENTRENAMIENTO[raza.entrenamiento] || raza.entrenamiento, acierto: comparar(ESCALA_ENTRENAMIENTO, resp.entrenamiento, raza.entrenamiento, 1) },
       { label: "Cuidados de aseo", valor: ETIQ_ASEO[raza.aseo] || raza.aseo, acierto: comparar(ESCALA_ASEO, resp.aseo, raza.aseo, 1) },
+      { label: "Tendencia a ladrar", valor: ETIQ_LADRIDOS[raza.ladridos] || raza.ladridos, acierto: comparar(ESCALA_LADRIDOS, resp.ladridos, raza.ladridos, 0) },
+      { label: "Nivel de muda de pelo", valor: ETIQ_MUDA[raza.mudaPelo] || raza.mudaPelo, acierto: comparar(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo, 0) },
       {
         label: "Nivel de cuidados veterinarios",
         valor: ETIQ_VETERINARIO[vetNivel],
@@ -936,6 +940,10 @@ function calcularResultado(resp) {
       else if (raza.vivienda === "indiferente") pts += PESOS.vivienda * 0.6;
       else { const p = puntajeEscala(["piso", "piso_con_terraza", "casa_con_jardin"], resp.vivienda, raza.vivienda); if (p !== null) pts += p * PESOS.vivienda * 0.5; }
     }
+    const pLad = puntajeEscala(ESCALA_LADRIDOS, resp.ladridos, raza.ladridos);
+    if (pLad !== null) pts += pLad * PESOS.ladridos;
+    const pMuda = puntajeEscala(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo);
+    if (pMuda !== null) pts += pMuda * PESOS.mudaPelo;
     if (RAZAS_DESTACADAS.has(raza.nombre) && pts > 0) {
       pts *= BOOST_DESTACADAS;
     }
@@ -979,9 +987,19 @@ const PREGUNTAS = [
     ],
   },
   {
+    seccion: "Perfil", key: "tuvo_perro",
+    titulo: "¿Como adulto has tenido perro antes?",
+    desc: "Tu experiencia previa determina qué razas te resultarán más cómodas de gestionar.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, tengo experiencia", sub: "He convivido con perros como propietario principal",             value: "experimentado" },
+      { label: "Primera vez",            sub: "Nunca he tenido o solo convivía con el perro de la familia",   value: "primerizo" },
+    ],
+  },
+  {
     seccion: "Perfil", key: "actividad",
-    titulo: "¿Cuánta actividad física quieres compartir con tu perro?",
-    desc: "Cada raza tiene necesidades de ejercicio distintas. Elegir bien evitará frustración en ambos.",
+    titulo: "¿Qué nivel de energía buscas en tu perro?",
+    desc: "Algunas razas son muy activas y siempre están preparadas para correr, jugar o acompañarte en una nueva aventura. Otras prefieren los paseos tranquilos, los momentos de descanso y disfrutar de tu compañía en casa.",
     hasIcon: false, cols: 1,
     opciones: [
       { label: "Tranquilo",  sub: "~1 h/día · Paseos cortos y vida en casa",      value: "bajo",  icon: <ActivityIcon level="bajo" /> },
@@ -1001,6 +1019,27 @@ const PREGUNTAS = [
     ],
   },
   {
+    seccion: "Temperamento", key: "otros_perros",
+    titulo: "¿Es importante que tu perro se lleve bien con otros animales?",
+    desc: "Si ya tienes o frecuentas otros perros u otras mascotas, la compatibilidad social es fundamental.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, es importante", value: "si" },
+      { label: "No es prioritario", value: NO_IMPORTA },
+    ],
+  },
+  {
+    seccion: "Temperamento", key: "vivienda",
+    titulo: "¿A qué tipo de espacio exterior tendrá acceso tu perro?",
+    desc: "El espacio disponible condiciona el bienestar de muchas razas, especialmente las más activas.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Piso sin jardín",         sub: "Solo paseos para el ejercicio",     value: "piso",             icon: <HouseIcon type="piso" /> },
+      { label: "Casa con jardín pequeño", sub: "Espacio para tomar el sol y jugar", value: "piso_con_terraza", icon: <HouseIcon type="piso_con_terraza" /> },
+      { label: "Casa con jardín amplio",  sub: "Terreno de juego libre",            value: "casa_con_jardin",  icon: <HouseIcon type="casa_con_jardin" /> },
+    ],
+  },
+  {
     seccion: "Temperamento", key: "temperamento",
     titulo: "¿Qué temperamento buscas en tu perro?",
     desc: "El carácter de la raza influirá en la convivencia diaria y en cómo interactúa con tu entorno.",
@@ -1014,24 +1053,50 @@ const PREGUNTAS = [
   },
   {
     seccion: "Cuidados", key: "entrenamiento",
-    titulo: "¿Cuánto tiempo dedicarás al adiestramiento?",
-    desc: "El nivel de entrenamiento influye directamente en la convivencia y el bienestar del perro.",
+    titulo: "¿Qué facilidad de aprendizaje buscas en tu perro?",
+    desc: "Algunas razas disfrutan aprendiendo y colaborando con sus personas, mientras que otras tienen un carácter más independiente y necesitan un enfoque educativo paciente y constante.",
     hasIcon: false, cols: 1,
     opciones: [
-      { label: "Básico",     sub: "Órdenes esenciales del día a día",                         value: "bajo" },
-      { label: "Intermedio", sub: "Obediencia avanzada, con ayuda profesional si hace falta", value: "alto" },
-      { label: "Avanzado",   sub: "Entrenamiento intensivo y deportes caninos",               value: "muy_alto" },
+      { label: "Alto",   sub: "Le encantará aprender y hacer actividades contigo.",        value: "muy_alto" },
+      { label: "Medio",  sub: "Disfrutará participando con cierta frecuencia.",            value: "alto" },
+      { label: "Normal", sub: "Se adaptará a actividades sencillas y ocasionales.",         value: "normal" },
+      { label: "Bajo",   sub: "Preferirá una rutina tranquila y más independiente.",        value: "bajo" },
+    ],
+  },
+  {
+    seccion: "Cuidados", key: "ladridos",
+    titulo: "¿Te molesta que tu perro sea comunicativo?",
+    desc: "Algunas razas ladran con frecuencia ante cualquier estímulo, mientras que otras solo lo hacen en momentos concretos. Incluso las razas consideradas poco ladradoras pueden expresarse mediante otros sonidos.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Muy poquito",      sub: "Mejor si se hace notar sin montar un concierto.", value: "bajo" },
+      { label: "De vez en cuando", sub: "Algún ladrido está bien.",                        value: "medio" },
+      { label: "Bastante",         sub: "No me importa que tenga muchas cosas que contar.", value: "alto" },
+      { label: "Mucho",            sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
+    ],
+  },
+  {
+    seccion: "Cuidados", key: "mudaPelo",
+    titulo: "¿Te importa encontrar pelitos por casa?",
+    desc: "Algunas razas sueltan bastante pelo y necesitan cepillados frecuentes, además de algo más de limpieza en casa. También conviene tenerlo en cuenta si alguien de la familia tiene alergias.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Muy poco",  sub: "Prefiero los pelos en el perro, no en el sofá.",       value: "sin_muda" },
+      { label: "Un poco",   sub: "Algún pelito por casa no me preocupa.",                value: "baja" },
+      { label: "Bastante",  sub: "Puedo convivir con cepillados y limpieza frecuentes.", value: "media" },
+      { label: "Mucho",     sub: "¡Los pelos forman parte de la familia!",              value: "alta" },
     ],
   },
   {
     seccion: "Cuidados", key: "aseo",
-    titulo: "¿Cuánto tiempo puedes dedicar al aseo?",
-    desc: "El pelo, las orejas y las uñas requieren atención regular que varía según la raza.",
+    titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
+    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados, tanto en casa como con ayuda de un profesional. Todos los perros necesitan una higiene básica y un corte de uñas regular.",
     hasIcon: false, cols: 1,
     opciones: [
-      { label: "Mínimo",    sub: "Cepillado mensual, sin peluquería frecuente",             value: "mensual" },
-      { label: "Moderado",  sub: "Cepillado semanal y visitas ocasionales al peluquero",    value: "semanal" },
-      { label: "Intensivo", sub: "Cepillado diario y peluquería cada 2–4 meses",           value: "diario" },
+      { label: "Lo esencial",       sub: "Prefiero cuidados sencillos y rápidos.",                       value: "mensual" },
+      { label: "De vez en cuando",  sub: "Puedo dedicarle un rato cada semana.",                         value: "semanal" },
+      { label: "Con frecuencia",    sub: "Disfruto cepillándolo y cuidando su manto.",                   value: "frecuente" },
+      { label: "Todo lo necesario", sub: "En casa o en la peluquería, tendrá sus cuidados al día.",       value: "diario" },
     ],
   },
   {
@@ -1045,40 +1110,9 @@ const PREGUNTAS = [
       { label: "Alto",     sub: "Visitas frecuentes y cuidados semanales en casa",        value: "alto" },
     ],
   },
-  {
-    seccion: "Cuidados", key: "otros_perros",
-    titulo: "¿Es importante que tu perro se lleve bien con otros perros?",
-    desc: "Si ya tienes o frecuentas otros perros, la compatibilidad social es fundamental.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, es importante", value: "si" },
-      { label: "No es prioritario", value: NO_IMPORTA },
-    ],
-  },
-  {
-    seccion: "Acerca de ti", key: "tuvo_perro",
-    titulo: "¿Tienes experiencia como propietario de perro?",
-    desc: "Tu experiencia previa determina qué razas te resultarán más cómodas de gestionar.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, tengo experiencia", sub: "He convivido con perros como propietario principal",             value: "experimentado" },
-      { label: "Primera vez",            sub: "Nunca he tenido o solo convivía con el perro de la familia",   value: "primerizo" },
-    ],
-  },
-  {
-    seccion: "Acerca de ti", key: "vivienda",
-    titulo: "¿A qué tipo de espacio exterior tendrá acceso tu perro?",
-    desc: "El espacio disponible condiciona el bienestar de muchas razas, especialmente las más activas.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Piso sin jardín",         sub: "Solo paseos para el ejercicio",     value: "piso",             icon: <HouseIcon type="piso" /> },
-      { label: "Casa con jardín pequeño", sub: "Espacio para tomar el sol y jugar", value: "piso_con_terraza", icon: <HouseIcon type="piso_con_terraza" /> },
-      { label: "Casa con jardín amplio",  sub: "Terreno de juego libre",            value: "casa_con_jardin",  icon: <HouseIcon type="casa_con_jardin" /> },
-    ],
-  },
 ];
 
-const SECCIONES = ["Perfil", "Temperamento", "Cuidados", "Acerca de ti"];
+const SECCIONES = ["Perfil", "Temperamento", "Cuidados"];
 
 const S = {
   wrapper: { width: "100%", minHeight: "100vh", background: C.pageBg, fontFamily: "'Segoe UI', system-ui, Arial, sans-serif", color: C.text, overflowX: "hidden", boxSizing: "border-box", display: "flex", flexDirection: "column" },
@@ -1093,6 +1127,7 @@ const S = {
   heroEyebrow: { fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", color: C.goldDark, textTransform: "uppercase", marginBottom: 10 },
   heroTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 30, fontWeight: 700, color: C.navyDark, lineHeight: 1.25, marginBottom: 10, margin: "0 0 10px" },
   heroDesc: { fontSize: 14, color: C.muted, lineHeight: 1.7, maxWidth: 480, margin: "0 auto" },
+  heroDisclaimer: { fontSize: 12, color: C.muted, lineHeight: 1.65, maxWidth: 520, margin: "16px auto 0", fontStyle: "italic" },
   progressRail: { background: C.white, borderBottom: `1px solid ${C.border}` },
   sectionTabs: { display: "flex" },
   sectionTab: (active, done) => ({ flex: 1, padding: "14px 0 12px", textAlign: "center", fontSize: 11.5, fontWeight: 600, letterSpacing: "0.04em", borderBottom: `3px solid ${done ? C.gold : active ? C.navy : "transparent"}`, color: done ? C.goldDark : active ? C.navy : C.muted, cursor: "default" }),
@@ -1141,7 +1176,8 @@ const S = {
   landingLeft: { flex: 1, maxWidth: 560 },
   landingEyebrow: { fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", color: C.goldDark, textTransform: "uppercase", marginBottom: 18 },
   landingTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 60, fontWeight: 700, color: C.navyDark, lineHeight: 1.15, margin: "0 0 22px" },
-  landingDesc: { fontSize: 16, color: C.muted, lineHeight: 1.7, margin: "0 0 32px", maxWidth: 460 },
+  landingDesc: { fontSize: 16, color: C.muted, lineHeight: 1.7, margin: "0 0 18px", maxWidth: 460 },
+  landingDisclaimer: { fontSize: 12.5, color: C.muted, lineHeight: 1.65, margin: "0 0 32px", maxWidth: 460, fontStyle: "italic" },
   landingSteps: { listStyle: "none", padding: 0, margin: "0 0 36px", display: "flex", flexDirection: "column", gap: 18 },
   landingStep: { display: "flex", alignItems: "center", gap: 16, fontSize: 15, color: C.text, fontWeight: 500 },
   landingStepNum: { width: 32, height: 32, borderRadius: "50%", background: C.gold, color: C.navyDark, fontWeight: 700, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
@@ -1278,8 +1314,14 @@ export default function TestPerroIdeal() {
           <div style={S.landingEyebrow}>RSCE · Test de razas</div>
           <h1 style={S.landingTitle}>Encuentra la<br />raza perfecta</h1>
           <p style={S.landingDesc}>
-            Responde {PREGUNTAS.length} preguntas sobre tu estilo de vida y descubre
-            qué raza de perro se adapta mejor a ti y a tu hogar.
+            Responde a unas sencillas preguntas y descubre qué razas podrían encajar mejor
+            contigo. Tendremos en cuenta tus preferencias, tu rutina y lo que esperas de tu
+            futuro compañero.
+          </p>
+          <p style={S.landingDisclaimer}>
+            El resultado será una primera orientación. Antes de tomar una decisión, te
+            recomendamos conocer personalmente las razas que más te interesen y consultar
+            con propietarios y criadores responsables.
           </p>
           <ol style={S.landingSteps}>
             <li style={S.landingStep}><span style={S.landingStepNum}>1</span><span>Responde a preguntas sobre tu estilo de vida</span></li>
@@ -1313,8 +1355,9 @@ export default function TestPerroIdeal() {
       <div style={S.heroEyebrow}>Test de compatibilidad de razas</div>
       <h1 style={S.heroTitle}>Encuentra la raza de perro<br />más adecuada para ti</h1>
       <p style={S.heroDesc}>
-        Responde {PREGUNTAS.length} preguntas sobre tu estilo de vida y te recomendaremos
-        la raza que mejor encaja con tu personalidad y circunstancias.
+        Responde a unas sencillas preguntas y descubre qué razas podrían encajar mejor
+        contigo. Tendremos en cuenta tus preferencias, tu rutina y lo que esperas de tu
+        futuro compañero.
       </p>
     </div>
   );
