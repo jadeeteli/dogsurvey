@@ -736,7 +736,7 @@ function construirFilasResultado(raza, resp) {
   const ESCALA_VET = ["bajo", "medio", "alto"];
 
   return {
-    perfil: [
+    Cuéntanos_un_poco_más_sobre_ti: [
       { label: "Tamaño", valor: ETIQ_TAMANO[raza.tamano] || raza.tamano, acierto: tamanoUsuarioOk },
       { label: "Nivel de energía", valor: ETIQ_ENERGIA[raza.energia] || raza.energia, acierto: comparar(ESCALA_ENERGIA, resp.actividad, raza.energia, 0) },
     ],
@@ -1075,18 +1075,7 @@ const PREGUNTAS = [
       { label: "Mucho",            sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
     ],
   },
-  {
-    seccion: "Cuidados", key: "mudaPelo",
-    titulo: "¿Te importa encontrar pelitos por casa?",
-    desc: "Algunas razas sueltan bastante pelo y necesitan cepillados frecuentes, además de algo más de limpieza en casa. También conviene tenerlo en cuenta si alguien de la familia tiene alergias.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Muy poco",  sub: "Prefiero los pelos en el perro, no en el sofá.",       value: "sin_muda" },
-      { label: "Un poco",   sub: "Algún pelito por casa no me preocupa.",                value: "baja" },
-      { label: "Bastante",  sub: "Puedo convivir con cepillados y limpieza frecuentes.", value: "media" },
-      { label: "Mucho",     sub: "¡Los pelos forman parte de la familia!",              value: "alta" },
-    ],
-  },
+ 
   {
     seccion: "Cuidados", key: "aseo",
     titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
@@ -1099,20 +1088,10 @@ const PREGUNTAS = [
       { label: "Todo lo necesario", sub: "En casa o en la peluquería, tendrá sus cuidados al día.",       value: "diario" },
     ],
   },
-  {
-    seccion: "Cuidados", key: "salud",
-    titulo: "¿Cuántos cuidados veterinarios puedes proporcionar?",
-    desc: "Algunas razas tienen predisposiciones genéticas que requieren seguimiento más frecuente.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Básico",   sub: "Vacunaciones y revisión anual",                          value: "bajo" },
-      { label: "Moderado", sub: "Revisiones semestrales y cuidados mensuales en casa",    value: "medio" },
-      { label: "Alto",     sub: "Visitas frecuentes y cuidados semanales en casa",        value: "alto" },
-    ],
-  },
+  
 ];
 
-const SECCIONES = ["Perfil", "Temperamento", "Cuidados"];
+const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro"];
 
 const S = {
   wrapper: { width: "100%", minHeight: "100vh", background: C.pageBg, fontFamily: "'Segoe UI', system-ui, Arial, sans-serif", color: C.text, overflowX: "hidden", boxSizing: "border-box", display: "flex", flexDirection: "column" },
@@ -1430,7 +1409,7 @@ export default function TestPerroIdeal() {
 
   const Resultado = () => {
     const [seleccionada, setSeleccionada] = useState(0);
-    const [tab, setTab] = useState("perfil");
+    const [tab, setTab] = useState(["Cuéntanos un poco más sobre ti");
 
     if (resultado.recomendarPeluche) {
       return (
@@ -1456,11 +1435,8 @@ export default function TestPerroIdeal() {
     const descripcion = razaActual ? descripcionGenerada(razaActual, nombreFormateado) : "";
 
   const TABS = [
-  { key: "perfil",          label: "Perfil" },
-  { key: "temperamento",    label: "Temperamento" },
-  { key: "cuidados",        label: "Cuidados" },
-  { key: "acercaDeTi",      label: "Acerca de ti" },
-  { key: "especificaciones", label: "Especificaciones" },
+  { key: "Cuéntanos_un_poco_más_sobre_it", label: "Cuéntanos un poco más sobre ti"},
+  { key: "Características_del_perro", label: "Características del perro" },
   ];
 
     const IconoAcierto = ({ acierto }) => (
@@ -1490,7 +1466,7 @@ export default function TestPerroIdeal() {
             <BreedAvatar
               key={i} nombre={p.nombre} pct={p.pct} size={84}
               activo={i === seleccionada}
-              onClick={() => { setSeleccionada(i); setTab("perfil"); }}
+              onClick={() => { setSeleccionada(i); setTab("Cuéntanos un poco más sobre ti"); }}
             />
           ))}
         </div>
