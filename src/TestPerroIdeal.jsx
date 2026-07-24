@@ -1408,13 +1408,11 @@ export default function TestPerroIdeal() {
           </div>
           <div style={S.qAside}>
             <div style={{ textAlign: "center", marginBottom: 8 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: C.white, display: "inline-flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
-                <img
-                  src="/logo-rsce.png"
-                  alt="Real Sociedad Canina de España"
-                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                />
-              </div>
+              <img
+                src="/logo-rsce.png"
+                alt="Real Sociedad Canina de España"
+                style={{ width: 44, height: 44, objectFit: "contain", display: "inline-block" }}
+              />
             </div>
             <div style={S.asideTip}><p style={S.asideTipP}>{tip}</p></div>
             <div style={S.asideStat}>
