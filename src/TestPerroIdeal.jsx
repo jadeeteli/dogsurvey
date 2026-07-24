@@ -1180,7 +1180,7 @@ const S = {
   pelucheH2: { fontFamily: "'Poppins', sans-serif", fontSize: 22, color: C.navyDark, margin: "16px 0 10px" },
   pelucheP: { fontSize: 14, color: C.muted, lineHeight: 1.7, maxWidth: 380, margin: "0 auto 24px" },
   landing: { flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 40, padding: "40px 24px", background: C.white, maxWidth: 1200, margin: "0 auto", width: "100%", boxSizing: "border-box" },
-  landingLeft: { flex: 1, maxWidth: 560 },
+  landingLeft: { flex: 1, maxWidth: 560, display: "flex",flexDirection: "column", alignItems: "center", textAlign: "center",},
   landingEyebrow: { fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", color: C.goldDark, textTransform: "uppercase", marginBottom: 18 },
   landingTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 60, fontWeight: 700, color: C.navyDark, lineHeight: 1.15, margin: "0 0 22px" },
   landingDesc: { fontSize: 16, color: C.muted, lineHeight: 1.7, margin: "0 0 18px", maxWidth: 460 },
