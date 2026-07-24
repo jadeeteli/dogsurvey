@@ -1408,11 +1408,13 @@ export default function TestPerroIdeal() {
           </div>
           <div style={S.qAside}>
             <div style={{ textAlign: "center", marginBottom: 8 }}>
-              <svg viewBox="0 0 40 40" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="18" stroke={C.gold} strokeWidth="1.5" fill="none" />
-                <circle cx="20" cy="20" r="14" stroke={C.gold} strokeWidth="0.5" opacity="0.4" fill="none" />
-                <text x="20" y="26" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="'Poppins', sans-serif">R</text>
-              </svg>
+              <div style={{ width: 44, height: 44, borderRadius: "50%", background: C.white, display: "inline-flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
+                <img
+                  src="/logo-rsce.jpg"
+                  alt="Real Sociedad Canina de España"
+                  style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+                />
+              </div>
             </div>
             <div style={S.asideTip}><p style={S.asideTipP}>{tip}</p></div>
             <div style={S.asideStat}>
@@ -1632,11 +1634,11 @@ export default function TestPerroIdeal() {
       {mostrarInicio && (
         <header style={S.siteHeader}>
           <div style={S.logoArea}>
-            <svg viewBox="0 0 38 38" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="19" cy="19" r="18" stroke={C.gold} strokeWidth="1.5" />
-              <circle cx="19" cy="19" r="14" stroke={C.gold} strokeWidth="0.5" opacity="0.4" />
-              <text x="19" y="25" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="'Poppins', sans-serif">R</text>
-            </svg>
+            <img
+              src="/logo-rsce.jpg"
+              alt="Real Sociedad Canina de España"
+              style={{ width: 42, height: 42, objectFit: "contain", display: "block" }}
+            />
             <div style={S.logoText}>
               <span style={S.acronym}>RSCE</span>
               <span style={S.fullName}>Real Sociedad Canina de España</span>
