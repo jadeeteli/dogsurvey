@@ -9,10 +9,10 @@ const NO_IMPORTA = "no_importa";
 
 // ─── Paleta RSCE ────────────────────────────────────────────────────────────
 const C = {
-  navy:       "#3179AB",
-  navyDark:   "#3179AB",
+  navy:       "#005577",
+  navyDark:   "#005577",
   navyLight:  "#e8eef8",
-  gold:       "#FFA019",
+  gold:       "#ffa019",
   goldLight:  "#f5efd4",
   goldDark:   "#8a7030",
   red:        "#D6293E",
@@ -20,8 +20,8 @@ const C = {
   success:    "#3C8A52",
   successLight: "rgba(60,138,82,0.12)",
   white:      "#ffffff",
-  surface:    "#f7f6f3",
-  pageBg:     "#e7eaf2",
+  surface:    "#f0f0f2",
+  pageBg:     "#f0f0f2",
   border:     "rgba(0,48,135,0.12)",
   text:       "#0d1f45",
   muted:      "#6b7a99",
@@ -1122,7 +1122,7 @@ const PREGUNTAS = [
 const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro"];
 
 const S = {
-  wrapper: { width: "100%", minHeight: "100vh", background: C.pageBg, fontFamily: "'Segoe UI', system-ui, Arial, sans-serif", color: C.text, overflowX: "hidden", boxSizing: "border-box", display: "flex", flexDirection: "column" },
+  wrapper: { width: "100%", minHeight: "100vh", background: C.pageBg, fontFamily: "'Lato', sans-serif", color: C.text, overflowX: "hidden", boxSizing: "border-box", display: "flex", flexDirection: "column" },
   page: { maxWidth: 1080, width: "calc(100% - 48px)", margin: "32px auto", borderRadius: 14, overflow: "hidden", boxShadow: "0 10px 30px rgba(13,31,69,0.10)" },
   siteHeader: { background: C.navy, padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64, borderBottom: `3px solid ${C.gold}`, width: "100%", boxSizing: "border-box" },
   logoArea: { display: "flex", alignItems: "center", gap: 14 },
@@ -1132,7 +1132,7 @@ const S = {
   headerTag: { fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.12em" },
   hero: { background: C.white, borderBottom: `1px solid ${C.border}`, padding: "40px 56px 36px", textAlign: "center" },
   heroEyebrow: { fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", color: C.goldDark, textTransform: "uppercase", marginBottom: 10 },
-  heroTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 30, fontWeight: 700, color: C.navyDark, lineHeight: 1.25, marginBottom: 10, margin: "0 0 10px" },
+  heroTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 30, fontWeight: 700, color: C.navyDark, lineHeight: 1.25, marginBottom: 10, margin: "0 0 10px" },
   heroDesc: { fontSize: 14, color: C.muted, lineHeight: 1.7, maxWidth: 480, margin: "0 auto" },
   heroDisclaimer: { fontSize: 12, color: C.muted, lineHeight: 1.65, maxWidth: 520, margin: "16px auto 0", fontStyle: "italic" },
   progressRail: { background: C.white, borderBottom: `1px solid ${C.border}` },
@@ -1144,7 +1144,7 @@ const S = {
   qLeft: { flex: 1, padding: "40px 56px 36px", background: C.white },
   qAside: { width: 260, background: C.navyDark, padding: "36px 28px", display: "flex", flexDirection: "column", gap: 16 },
   qBadge: { fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", color: C.gold, textTransform: "uppercase", marginBottom: 6 },
-  qTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 20, fontWeight: 700, color: C.navyDark, lineHeight: 1.35, margin: "0 0 10px" },
+  qTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 20, fontWeight: 700, color: C.navyDark, lineHeight: 1.35, margin: "0 0 10px" },
   qDesc: { fontSize: 13, color: C.muted, lineHeight: 1.65, margin: "0 0 24px" },
   optsGrid: (cols) => ({ display: "grid", gridTemplateColumns: cols === 3 ? "1fr 1fr 1fr" : cols === 2 ? "1fr 1fr" : "1fr", gap: 14, marginBottom: 8 }),
   optBtn: (selected) => ({ background: selected ? C.navyLight : C.white, border: `1.5px solid ${selected ? C.navy : C.border}`, borderRadius: 10, padding: "14px 16px", cursor: "pointer", textAlign: "left", display: "flex", alignItems: "flex-start", gap: 12, outline: "none", boxShadow: selected ? `0 0 0 3px rgba(0,48,135,0.1)` : "none", transition: "border-color 0.15s, background 0.15s" }),
@@ -1158,16 +1158,16 @@ const S = {
   asideTip: { background: "rgba(201,169,75,0.12)", borderLeft: `3px solid ${C.gold}`, borderRadius: "0 6px 6px 0", padding: "12px 14px" },
   asideTipP: { fontSize: 12, color: "rgba(255,255,255,0.65)", lineHeight: 1.55, margin: 0 },
   asideStat: { textAlign: "center", padding: "12px 0", borderTop: "1px solid rgba(255,255,255,0.1)" },
-  asideNum: { fontFamily: "Georgia,serif", fontSize: 28, fontWeight: 700, color: C.gold, display: "block" },
+  asideNum: { fontFamily: "'Poppins', sans-serif", fontSize: 28, fontWeight: 700, color: C.gold, display: "block" },
   asideLbl: { fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: "0.06em", textTransform: "uppercase" },
   resultHero: { background: C.navy, padding: "52px 56px 44px", textAlign: "center" },
   resultEyebrow: { fontSize: 11, letterSpacing: "0.18em", color: C.goldDark, textTransform: "uppercase", marginBottom: 10, fontWeight: 700 },
-  resultBreed: { fontFamily: "Georgia,serif", fontSize: 36, fontWeight: 700, color: C.white, marginBottom: 10, margin: "0 0 10px" },
+  resultBreed: { fontFamily: "'Poppins', sans-serif", fontSize: 36, fontWeight: 700, color: C.white, marginBottom: 10, margin: "0 0 10px" },
   compatPill: { display: "inline-flex", alignItems: "center", gap: 10, background: C.gold, color: C.navyDark, fontSize: 15, fontWeight: 700, padding: "9px 26px", borderRadius: 24, marginTop: 10 },
   resultBody: { background: C.white, padding: "36px 56px", textAlign: "center" },
   avatarStrip: { display: "flex", justifyContent: "center", gap: 26, padding: "40px 32px", background: C.surface, borderBottom: `1px solid ${C.border}`, flexWrap: "wrap" },
   resultBody2: { background: C.white, padding: "56px 64px 60px", textAlign: "center" },
-  resultBreedBig: { fontFamily: "Georgia,serif", fontSize: 48, fontWeight: 700, color: C.navyDark, margin: "0 0 16px" },
+  resultBreedBig: { fontFamily: "'Poppins', sans-serif", fontSize: 48, fontWeight: 700, color: C.navyDark, margin: "0 0 16px" },
   resultRasgos: { fontSize: 18, color: C.muted, margin: 0 },
   resultLabel: { fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: C.muted, textTransform: "uppercase", marginBottom: 16, display: "block" },
   altRow: { display: "flex", alignItems: "center", gap: 14, padding: "13px 16px", border: `1px solid ${C.border}`, borderRadius: 8, marginBottom: 4 },
@@ -1177,12 +1177,12 @@ const S = {
   pctFill: (w) => ({ height: 4, background: C.gold, borderRadius: 2, width: `${w}%` }),
   btnPrimary: { background: C.navy, color: C.white, border: "none", borderRadius: 8, padding: "12px 32px", fontSize: 14, fontWeight: 700, cursor: "pointer", letterSpacing: "0.03em", marginTop: 24, display: "block", margin: "24px auto 0" },
   peluche: { textAlign: "center", padding: "60px 56px", background: C.white },
-  pelucheH2: { fontFamily: "Georgia,serif", fontSize: 22, color: C.navyDark, margin: "16px 0 10px" },
+  pelucheH2: { fontFamily: "'Poppins', sans-serif", fontSize: 22, color: C.navyDark, margin: "16px 0 10px" },
   pelucheP: { fontSize: 14, color: C.muted, lineHeight: 1.7, maxWidth: 380, margin: "0 auto 24px" },
   landing: { flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 40, padding: "40px 24px", background: C.white, maxWidth: 1200, margin: "0 auto", width: "100%", boxSizing: "border-box" },
   landingLeft: { flex: 1, maxWidth: 560 },
   landingEyebrow: { fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", color: C.goldDark, textTransform: "uppercase", marginBottom: 18 },
-  landingTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 60, fontWeight: 700, color: C.navyDark, lineHeight: 1.15, margin: "0 0 22px" },
+  landingTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 60, fontWeight: 700, color: C.navyDark, lineHeight: 1.15, margin: "0 0 22px" },
   landingDesc: { fontSize: 16, color: C.muted, lineHeight: 1.7, margin: "0 0 18px", maxWidth: 460 },
   landingDisclaimer: { fontSize: 12.5, color: C.muted, lineHeight: 1.65, margin: "0 0 32px", maxWidth: 460, fontStyle: "italic" },
   landingSteps: { listStyle: "none", padding: 0, margin: "0 0 36px", display: "flex", flexDirection: "column", gap: 18 },
@@ -1212,12 +1212,12 @@ const S = {
   detailIcon: (acierto) => ({ flexShrink: 0, width: 26, height: 26, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: acierto === null ? C.navyLight : acierto ? C.successLight : C.redLight, color: acierto === null ? C.muted : acierto ? C.success : C.red, marginTop: 2 }),
   detailRight: { border: `1px solid ${C.gold}`, borderRadius: 14, padding: "32px 28px", textAlign: "center", background: C.white },
   detailBadge: { width: 64, height: 64, borderRadius: "50%", border: `1.5px solid ${C.gold}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px" },
-  detailTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 19, fontWeight: 700, color: C.navyDark, margin: "0 0 14px", lineHeight: 1.35 },
+  detailTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 19, fontWeight: 700, color: C.navyDark, margin: "0 0 14px", lineHeight: 1.35 },
   detailDesc: { fontSize: 13.5, color: C.muted, lineHeight: 1.7, margin: "0 0 22px" },
   btnFCI: { background: C.navy, color: C.white, border: "none", borderRadius: 8, padding: "13px 30px", fontSize: 14, fontWeight: 700, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" },
 
   specsCard: { background: C.white, border: `1px solid ${C.border}`, borderRadius: 14, padding: "24px 28px" },
-  specsTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 16, fontWeight: 700, color: C.navyDark, margin: "0 0 8px" },
+  specsTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 16, fontWeight: 700, color: C.navyDark, margin: "0 0 8px" },
   specsTitleRule: { width: 36, height: 3, background: C.gold, marginBottom: 24 },
   specsGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, marginBottom: 28 },
   specsColLabel: { fontSize: 13, fontWeight: 700, color: C.navyDark, marginBottom: 14, paddingBottom: 8, borderBottom: `1px solid ${C.border}` },
@@ -1232,7 +1232,7 @@ const S = {
   fichaBack: { display: "inline-flex", alignItems: "center", gap: 6, background: "none", border: "none", color: C.navy, fontSize: 13.5, fontWeight: 600, cursor: "pointer", padding: 0, marginBottom: 28 },
   fichaHead: { display: "flex", gap: 48, alignItems: "flex-start", flexWrap: "wrap", marginBottom: 48 },
   fichaHeadLeft: { flex: "1 1 360px", minWidth: 280 },
-  fichaTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 44, fontWeight: 700, color: C.red, lineHeight: 1.12, margin: "0 0 18px" },
+  fichaTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 44, fontWeight: 700, color: C.red, lineHeight: 1.12, margin: "0 0 18px" },
   fichaShare: { display: "flex", gap: 14, alignItems: "center", marginBottom: 26 },
   fichaShareBtn: { width: 30, height: 30, borderRadius: "50%", border: `1px solid ${C.border}`, background: C.white, display: "flex", alignItems: "center", justifyContent: "center", color: C.muted, cursor: "default" },
   fichaDesc: { fontSize: 14.5, color: C.text, lineHeight: 1.75, maxWidth: 460, margin: 0 },
@@ -1240,7 +1240,7 @@ const S = {
   fichaImgWrap: { width: "100%", maxWidth: 420, aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", background: C.navyLight },
   fichaCols: { display: "flex", gap: 40, flexWrap: "wrap", borderTop: `1px solid ${C.border}`, paddingTop: 36 },
   fichaCol: { flex: "1 1 260px", minWidth: 220 },
-  fichaColTitle: { fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 19, fontWeight: 700, color: C.red, margin: "0 0 14px" },
+  fichaColTitle: { fontFamily: "'Poppins', sans-serif", fontSize: 19, fontWeight: 700, color: C.red, margin: "0 0 14px" },
   fichaColP: { fontSize: 13.5, color: C.text, lineHeight: 1.75, margin: "0 0 10px" },
   fichaColLine: { fontSize: 13.5, color: C.text, lineHeight: 1.9, margin: 0 },
 };
@@ -1411,7 +1411,7 @@ export default function TestPerroIdeal() {
               <svg viewBox="0 0 40 40" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="20" cy="20" r="18" stroke={C.gold} strokeWidth="1.5" fill="none" />
                 <circle cx="20" cy="20" r="14" stroke={C.gold} strokeWidth="0.5" opacity="0.4" fill="none" />
-                <text x="20" y="26" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="Georgia,serif">R</text>
+                <text x="20" y="26" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="'Poppins', sans-serif">R</text>
               </svg>
             </div>
             <div style={S.asideTip}><p style={S.asideTipP}>{tip}</p></div>
@@ -1628,13 +1628,14 @@ export default function TestPerroIdeal() {
 
   return (
     <div style={{ ...S.wrapper, justifyContent: mostrarInicio ? "center" : "flex-start", alignItems: "center" }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600;700&display=swap');`}</style>
       {mostrarInicio && (
         <header style={S.siteHeader}>
           <div style={S.logoArea}>
             <svg viewBox="0 0 38 38" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="19" cy="19" r="18" stroke={C.gold} strokeWidth="1.5" />
               <circle cx="19" cy="19" r="14" stroke={C.gold} strokeWidth="0.5" opacity="0.4" />
-              <text x="19" y="25" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="Georgia,serif">R</text>
+              <text x="19" y="25" textAnchor="middle" fontSize="18" fontWeight="700" fill={C.gold} fontFamily="'Poppins', sans-serif">R</text>
             </svg>
             <div style={S.logoText}>
               <span style={S.acronym}>RSCE</span>
