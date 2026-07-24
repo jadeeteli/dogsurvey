@@ -1411,7 +1411,7 @@ export default function TestPerroIdeal() {
               <img
                 src="/logo-rsce.png"
                 alt="Real Sociedad Canina de España"
-                style={{ width: 44, height: 44, objectFit: "contain", display: "inline-block" }}
+                style={{ width: 80, height: 80, objectFit: "contain", display: "inline-block" }}
               />
             </div>
             <div style={S.asideTip}><p style={S.asideTipP}>{tip}</p></div>
