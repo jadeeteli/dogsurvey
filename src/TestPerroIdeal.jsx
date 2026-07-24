@@ -653,6 +653,7 @@ const PESOS = {
   tamano: 4, actividad: 5, ninos: 5, temperamento: 3,
   aseo: 3, salud: 2, entrenamiento: 2, otros_perros: 3,
   tuvo_perro: 1, vivienda: 4, ladridos: 2, mudaPelo: 2,
+  alergenico: 3,
 };
 
 // ─── Razas destacadas ───────────────────────────────────────────────────────
@@ -766,13 +767,18 @@ function construirFilasResultado(raza, resp) {
     ],
     cuidados: [
       { label: "Necesidades educativas", valor: ETIQ_ENTRENAMIENTO[raza.entrenamiento] || raza.entrenamiento, acierto: comparar(ESCALA_ENTRENAMIENTO, resp.entrenamiento, raza.entrenamiento, 1) },
-      { label: "Cuidados de aseo", valor: ETIQ_ASEO[raza.aseo] || raza.aseo, acierto: comparar(ESCALA_ASEO, resp.aseo, raza.aseo, 1) },
+      { label: "Cuidados de aseo y muda de pelo", valor: ETIQ_ASEO[raza.aseo] || raza.aseo, acierto: comparar(ESCALA_ASEO, resp.aseo, raza.aseo, 1) },
       { label: "Tendencia a ladrar", valor: ETIQ_LADRIDOS[raza.ladridos] || raza.ladridos, acierto: comparar(ESCALA_LADRIDOS, resp.ladridos, raza.ladridos, 0) },
       { label: "Nivel de muda de pelo", valor: ETIQ_MUDA[raza.mudaPelo] || raza.mudaPelo, acierto: comparar(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo, 0) },
       {
         label: "Nivel de cuidados veterinarios",
         valor: ETIQ_VETERINARIO[vetNivel],
         acierto: !resp.salud || resp.salud === NO_IMPORTA ? null : comparar(ESCALA_VET, resp.salud === "alto" ? "alto" : resp.salud === "bajo" ? "bajo" : "medio", vetNivel, 0),
+      },
+      {
+        label: "Perro poco alergénico",
+        valor: raza.mudaPelo === "sin_muda" ? "Sí, muda mínima" : raza.mudaPelo === "baja" ? "Bastante, muda baja" : "No especialmente",
+        acierto: resp.alergenico !== "si" ? null : raza.mudaPelo === "sin_muda" || raza.mudaPelo === "baja",
       },
     ],
     acercaDeTi: [
@@ -887,7 +893,11 @@ function puntajeEscala(escala, vU, vR) {
 }
 
 function calcularResultado(resp) {
-  const maxPts = Object.entries(PESOS).reduce((a, [k, p]) => (resp[k] === NO_IMPORTA ? a : a + p), 0);
+  const maxPts = Object.entries(PESOS).reduce((a, [k, p]) => {
+    if (resp[k] === NO_IMPORTA) return a;
+    if (k === "alergenico" && resp[k] !== "si") return a;
+    return a + p;
+  }, 0);
 
   const resultados = razas.map((raza) => {
     let pts = 0;
@@ -944,6 +954,11 @@ function calcularResultado(resp) {
     if (pLad !== null) pts += pLad * PESOS.ladridos;
     const pMuda = puntajeEscala(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo);
     if (pMuda !== null) pts += pMuda * PESOS.mudaPelo;
+    if (resp.alergenico === "si") {
+      if (raza.mudaPelo === "sin_muda") pts += PESOS.alergenico;
+      else if (raza.mudaPelo === "baja") pts += PESOS.alergenico * 0.6;
+      else if (raza.mudaPelo === "alta") pts -= PESOS.alergenico * 0.75;
+    }
     if (RAZAS_DESTACADAS.has(raza.nombre) && pts > 0) {
       pts *= BOOST_DESTACADAS;
     }
@@ -969,11 +984,79 @@ const ASIDE_TIPS = [
   "Conocer la raza ayuda a establecer expectativas realistas.",
   "La vivienda importa, pero el ejercicio diario importa más.",
   "La experiencia previa facilita la adaptación mutua.",
+  "Ningún perro es 100% hipoalergénico, pero algunas razas sueltan mucho menos pelo.",
 ];
 
 const PREGUNTAS = [
+  // ─── BLOQUE 1 · Cuéntanos un poco más sobre ti ─────────────────────────
   {
-    seccion: "Perfil", key: "tamano",
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "tuvo_perro",
+    titulo: "¿Como adulto has tenido perro antes?",
+    desc: "Tu experiencia previa determina qué razas te resultarán más cómodas de gestionar.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, tengo experiencia", sub: "He convivido con perros como propietario principal",             value: "experimentado" },
+      { label: "Primera vez",            sub: "Nunca he tenido o solo convivía con el perro de la familia",   value: "primerizo" },
+    ],
+  },
+  {
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "actividad",
+    titulo: "¿Qué nivel de energía buscas en tu perro?",
+    desc: "Algunas razas son muy activas y siempre están preparadas para correr, jugar o acompañarte en una nueva aventura. Otras prefieren los paseos tranquilos, los momentos de descanso y disfrutar de tu compañía en casa.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Tranquilo",  sub: "~1 h/día · Paseos cortos y vida en casa",      value: "bajo",  icon: <ActivityIcon level="bajo" /> },
+      { label: "Moderado",   sub: "1–3 h/día · Paseos largos y salidas",           value: "medio", icon: <ActivityIcon level="medio" /> },
+      { label: "Muy activo", sub: "+3 h/día · Deporte y aventura al aire libre",  value: "alto",  icon: <ActivityIcon level="alto" /> },
+    ],
+  },
+  {
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "ninos",
+    titulo: "¿Hay niños en casa o los habrá próximamente?",
+    desc: "Algunas razas muestran una paciencia y afecto excepcional con los más pequeños.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, viven en casa",                          value: "convive_siempre" },
+      { label: "Probablemente en los próximos años",          value: "alguna_visita" },
+      { label: "No",                                          value: "sin_ninos" },
+    ],
+  },
+  {
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "otros_perros",
+    titulo: "¿Es importante que tu perro se lleve bien con otros animales?",
+    desc: "Si ya tienes o frecuentas otros perros u otras mascotas, la compatibilidad social es fundamental.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, es importante", value: "si" },
+      { label: "No es prioritario", value: NO_IMPORTA },
+    ],
+  },
+  {
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "vivienda",
+    titulo: "¿A qué tipo de espacio exterior tendrá acceso tu perro?",
+    desc: "El espacio disponible condiciona el bienestar de muchas razas, especialmente las más activas.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Piso sin jardín",         sub: "Solo paseos para el ejercicio",     value: "piso",             icon: <HouseIcon type="piso" /> },
+      { label: "Casa con jardín pequeño", sub: "Espacio para tomar el sol y jugar", value: "piso_con_terraza", icon: <HouseIcon type="piso_con_terraza" /> },
+      { label: "Casa con jardín amplio",  sub: "Terreno de juego libre",            value: "casa_con_jardin",  icon: <HouseIcon type="casa_con_jardin" /> },
+    ],
+  },
+  {
+    seccion: "Cuéntanos un poco más sobre ti", seccionCorta: "Sobre ti", key: "alergenico",
+    titulo: "¿Buscas un perro poco alergénico?",
+    desc: "Algunas razas producen menos alérgenos gracias a su tipo de pelo, lo que puede ser útil si alguien en casa es sensible a los perros. Ningún perro es 100% hipoalergénico, pero unas razas sueltan mucho menos pelo y caspa que otras.",
+    hasIcon: false, cols: 1,
+    opciones: [
+      { label: "Sí, es importante", sub: "Prefiero una raza que suelte poco pelo y caspa.", value: "si" },
+      { label: "No es necesario",   sub: "No es un factor determinante para mí.",           value: "no" },
+      { label: "No lo tengo claro", sub: "Prefiero no descartar razas por este motivo.",     value: NO_IMPORTA },
+    ],
+  },
+
+  // ─── BLOQUE 2 · Características del perro ──────────────────────────────
+  {
+    seccion: "Características del perro", seccionCorta: "Características", key: "tamano",
     titulo: "¿Qué tamaño de perro te gustaría tener?",
     desc: "El tamaño influye en el espacio que necesita, los costes de alimentación y veterinario, y su adaptación a tu vivienda.",
     hasIcon: true, cols: 3,
@@ -987,60 +1070,7 @@ const PREGUNTAS = [
     ],
   },
   {
-    seccion: "Perfil", key: "tuvo_perro",
-    titulo: "¿Como adulto has tenido perro antes?",
-    desc: "Tu experiencia previa determina qué razas te resultarán más cómodas de gestionar.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, tengo experiencia", sub: "He convivido con perros como propietario principal",             value: "experimentado" },
-      { label: "Primera vez",            sub: "Nunca he tenido o solo convivía con el perro de la familia",   value: "primerizo" },
-    ],
-  },
-  {
-    seccion: "Perfil", key: "actividad",
-    titulo: "¿Qué nivel de energía buscas en tu perro?",
-    desc: "Algunas razas son muy activas y siempre están preparadas para correr, jugar o acompañarte en una nueva aventura. Otras prefieren los paseos tranquilos, los momentos de descanso y disfrutar de tu compañía en casa.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Tranquilo",  sub: "~1 h/día · Paseos cortos y vida en casa",      value: "bajo",  icon: <ActivityIcon level="bajo" /> },
-      { label: "Moderado",   sub: "1–3 h/día · Paseos largos y salidas",           value: "medio", icon: <ActivityIcon level="medio" /> },
-      { label: "Muy activo", sub: "+3 h/día · Deporte y aventura al aire libre",  value: "alto",  icon: <ActivityIcon level="alto" /> },
-    ],
-  },
-  {
-    seccion: "Temperamento", key: "ninos",
-    titulo: "¿Hay niños en casa o los habrá próximamente?",
-    desc: "Algunas razas muestran una paciencia y afecto excepcional con los más pequeños.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, viven en casa",                          value: "convive_siempre" },
-      { label: "Probablemente en los próximos años",          value: "alguna_visita" },
-      { label: "No",                                          value: "sin_ninos" },
-    ],
-  },
-  {
-    seccion: "Temperamento", key: "otros_perros",
-    titulo: "¿Es importante que tu perro se lleve bien con otros animales?",
-    desc: "Si ya tienes o frecuentas otros perros u otras mascotas, la compatibilidad social es fundamental.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Sí, es importante", value: "si" },
-      { label: "No es prioritario", value: NO_IMPORTA },
-    ],
-  },
-  {
-    seccion: "Temperamento", key: "vivienda",
-    titulo: "¿A qué tipo de espacio exterior tendrá acceso tu perro?",
-    desc: "El espacio disponible condiciona el bienestar de muchas razas, especialmente las más activas.",
-    hasIcon: false, cols: 1,
-    opciones: [
-      { label: "Piso sin jardín",         sub: "Solo paseos para el ejercicio",     value: "piso",             icon: <HouseIcon type="piso" /> },
-      { label: "Casa con jardín pequeño", sub: "Espacio para tomar el sol y jugar", value: "piso_con_terraza", icon: <HouseIcon type="piso_con_terraza" /> },
-      { label: "Casa con jardín amplio",  sub: "Terreno de juego libre",            value: "casa_con_jardin",  icon: <HouseIcon type="casa_con_jardin" /> },
-    ],
-  },
-  {
-    seccion: "Temperamento", key: "temperamento",
+    seccion: "Características del perro", seccionCorta: "Características", key: "temperamento",
     titulo: "¿Qué temperamento buscas en tu perro?",
     desc: "El carácter de la raza influirá en la convivencia diaria y en cómo interactúa con tu entorno.",
     hasIcon: false, cols: 2,
@@ -1052,7 +1082,7 @@ const PREGUNTAS = [
     ],
   },
   {
-    seccion: "Cuidados", key: "entrenamiento",
+    seccion: "Características del perro", seccionCorta: "Cuidados", key: "entrenamiento",
     titulo: "¿Qué facilidad de aprendizaje buscas en tu perro?",
     desc: "Algunas razas disfrutan aprendiendo y colaborando con sus personas, mientras que otras tienen un carácter más independiente y necesitan un enfoque educativo paciente y constante.",
     hasIcon: false, cols: 1,
@@ -1064,7 +1094,7 @@ const PREGUNTAS = [
     ],
   },
   {
-    seccion: "Cuidados", key: "ladridos",
+    seccion: "Características del perro", seccionCorta: "Cuidados", key: "ladridos",
     titulo: "¿Te molesta que tu perro sea comunicativo?",
     desc: "Algunas razas ladran con frecuencia ante cualquier estímulo, mientras que otras solo lo hacen en momentos concretos. Incluso las razas consideradas poco ladradoras pueden expresarse mediante otros sonidos.",
     hasIcon: false, cols: 1,
@@ -1075,20 +1105,18 @@ const PREGUNTAS = [
       { label: "Mucho",            sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
     ],
   },
- 
   {
-    seccion: "Cuidados", key: "aseo",
+    seccion: "Características del perro", seccionCorta: "Cuidados", key: "aseo",
     titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
-    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados, tanto en casa como con ayuda de un profesional. Todos los perros necesitan una higiene básica y un corte de uñas regular.",
+    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados, tanto en casa como con ayuda de un profesional. Ten en cuenta también cuánto te importa encontrar pelitos por casa, ya que algunas razas mudan mucho más que otras.",
     hasIcon: false, cols: 1,
     opciones: [
-      { label: "Lo esencial",       sub: "Prefiero cuidados sencillos y rápidos.",                       value: "mensual" },
-      { label: "De vez en cuando",  sub: "Puedo dedicarle un rato cada semana.",                         value: "semanal" },
-      { label: "Con frecuencia",    sub: "Disfruto cepillándolo y cuidando su manto.",                   value: "frecuente" },
-      { label: "Todo lo necesario", sub: "En casa o en la peluquería, tendrá sus cuidados al día.",       value: "diario" },
+      { label: "Lo esencial",       sub: "Cuidados sencillos y rápidos; prefiero los pelos en el perro, no en el sofá.",             value: "mensual" },
+      { label: "De vez en cuando",  sub: "Un rato cada semana; algún pelito por casa no me preocupa.",                               value: "semanal" },
+      { label: "Con frecuencia",    sub: "Disfruto cepillándolo y cuidando su manto; puedo convivir con algo más de limpieza.",       value: "frecuente" },
+      { label: "Todo lo necesario", sub: "En casa o en la peluquería, tendrá sus cuidados al día; ¡los pelos forman parte de la familia!", value: "diario" },
     ],
   },
-  
 ];
 
 const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro"];
@@ -1348,7 +1376,7 @@ export default function TestPerroIdeal() {
         <ProgressRail />
         <div style={S.qLayout}>
           <div style={S.qLeft}>
-            <div style={S.qBadge}>{pregunta.seccion} · Pregunta {step + 1} de {PREGUNTAS.length}</div>
+            <div style={S.qBadge}>{pregunta.seccionCorta || pregunta.seccion} · Pregunta {step + 1} de {PREGUNTAS.length}</div>
             <h2 style={S.qTitle}>{pregunta.titulo}</h2>
             <p style={S.qDesc}>{pregunta.desc}</p>
             <div style={S.optsGrid(pregunta.cols)}>
@@ -1409,7 +1437,7 @@ export default function TestPerroIdeal() {
 
   const Resultado = () => {
     const [seleccionada, setSeleccionada] = useState(0);
-    const [tab, setTab] = useState(["Cuéntanos un poco más sobre ti");
+    const [tab, setTab] = useState("Cuéntanos_un_poco_más_sobre_ti");
 
     if (resultado.recomendarPeluche) {
       return (
@@ -1435,8 +1463,8 @@ export default function TestPerroIdeal() {
     const descripcion = razaActual ? descripcionGenerada(razaActual, nombreFormateado) : "";
 
   const TABS = [
-  { key: "Cuéntanos_un_poco_más_sobre_it", label: "Cuéntanos un poco más sobre ti"},
-  { key: "Características_del_perro", label: "Características del perro" },
+  { key: "Cuéntanos_un_poco_más_sobre_ti", label: "Cuéntanos un poco más sobre ti"},
+  { key: "cuidados", label: "Características del perro" },
   ];
 
     const IconoAcierto = ({ acierto }) => (
@@ -1466,7 +1494,7 @@ export default function TestPerroIdeal() {
             <BreedAvatar
               key={i} nombre={p.nombre} pct={p.pct} size={84}
               activo={i === seleccionada}
-              onClick={() => { setSeleccionada(i); setTab("Cuéntanos un poco más sobre ti"); }}
+              onClick={() => { setSeleccionada(i); setTab("Cuéntanos_un_poco_más_sobre_ti"); }}
             />
           ))}
         </div>
