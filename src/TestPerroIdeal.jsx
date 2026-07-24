@@ -1655,10 +1655,7 @@ export default function TestPerroIdeal() {
               <Resultado />
             </>
           ) : (
-            <>
-              {step === 0 && <Hero />}
-              <Question />
-            </>
+            <Question />
           )}
         </div>
       )}
