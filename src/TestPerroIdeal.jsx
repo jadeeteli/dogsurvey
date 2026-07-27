@@ -587,6 +587,73 @@ const StarRating = ({ value = 0, max = 5 }) => (
   </div>
 );
 
+const RankingQuestion = ({ pregunta, valorInicial, onConfirmar }) => {
+  const [orden, setOrden] = useState(valorInicial || pregunta.items.map((i) => i.key));
+
+  const mover = (key, dir) => {
+    setOrden((prev) => {
+      const idx = prev.indexOf(key);
+      const nuevoIdx = idx + dir;
+      if (nuevoIdx < 0 || nuevoIdx >= prev.length) return prev;
+      const copia = [...prev];
+      [copia[idx], copia[nuevoIdx]] = [copia[nuevoIdx], copia[idx]];
+      return copia;
+    });
+  };
+
+  return (
+    <div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
+        {orden.map((key, i) => {
+          const item = pregunta.items.find((it) => it.key === key);
+          return (
+            <div
+              key={key}
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                background: C.white, border: `1px solid ${C.border}`, borderRadius: 10,
+                padding: "14px 18px",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <svg viewBox="0 0 20 20" width="16" height="16" fill={C.muted}>
+                  <rect y="3" width="20" height="2" />
+                  <rect y="9" width="20" height="2" />
+                  <rect y="15" width="20" height="2" />
+                </svg>
+                <span style={{ fontSize: 14, fontWeight: 600, color: C.navyDark }}>{item.label}</span>
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  onClick={() => mover(key, -1)}
+                  disabled={i === 0}
+                  style={{
+                    width: 28, height: 28, borderRadius: "50%", border: "none",
+                    background: i === 0 ? C.navyLight : C.navy,
+                    color: i === 0 ? C.muted : C.white,
+                    cursor: i === 0 ? "default" : "pointer",
+                  }}
+                >↑</button>
+                <button
+                  onClick={() => mover(key, 1)}
+                  disabled={i === orden.length - 1}
+                  style={{
+                    width: 28, height: 28, borderRadius: "50%", border: "none",
+                    background: i === orden.length - 1 ? C.navyLight : C.navy,
+                    color: i === orden.length - 1 ? C.muted : C.white,
+                    cursor: i === orden.length - 1 ? "default" : "pointer",
+                  }}
+                >↓</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <button style={S.landingBtn} onClick={() => onConfirmar(orden)}>Continuar</button>
+    </div>
+  );
+};
+
 function rasgosDeRaza(raza) {
   const candidatos = [];
   if (raza.sociabilidad === "muy_sociable") candidatos.push("Amoroso");
@@ -655,6 +722,19 @@ const PESOS = {
   tuvo_perro: 1, vivienda: 4, ladridos: 2, mudaPelo: 2,
   alergenico: 3,
 };
+
+function pesosSegunPrioridad(orden) {
+  if (!orden || orden.length === 0) return PESOS;
+  const ajustados = { ...PESOS };
+  orden.forEach((key, i) => {
+    // posición 0 (más importante) = x1.6 ... última posición = x0.5
+    const factor = 1.6 - (i / (orden.length - 1)) * 1.1;
+    if (ajustados[key] !== undefined) {
+      ajustados[key] = PESOS[key] * factor;
+    }
+  });
+  return ajustados;
+}
 
 // ─── Razas destacadas ───────────────────────────────────────────────────────
 const RAZAS_DESTACADAS = new Set([
@@ -893,7 +973,9 @@ function puntajeEscala(escala, vU, vR) {
 }
 
 function calcularResultado(resp) {
-  const maxPts = Object.entries(PESOS).reduce((a, [k, p]) => {
+  const pesos = pesosSegunPrioridad(resp.prioridades);
+
+  const maxPts = Object.entries(pesos).reduce((a, [k, p]) => {
     if (resp[k] === NO_IMPORTA) return a;
     if (k === "alergenico" && resp[k] !== "si") return a;
     return a + p;
@@ -902,62 +984,62 @@ function calcularResultado(resp) {
   const resultados = razas.map((raza) => {
     let pts = 0;
     if (resp.tamano !== NO_IMPORTA) {
-      if (raza.tamano === "indiferente") pts += PESOS.tamano;
-      else { const p = puntajeEscala(ESCALA_TAMANO, resp.tamano, raza.tamano); if (p !== null) pts += p * PESOS.tamano; }
+      if (raza.tamano === "indiferente") pts += pesos.tamano;
+      else { const p = puntajeEscala(ESCALA_TAMANO, resp.tamano, raza.tamano); if (p !== null) pts += p * pesos.tamano; }
     }
     const pEn = puntajeEscala(ESCALA_ENERGIA, resp.actividad, raza.energia);
-    if (pEn !== null) pts += pEn * PESOS.actividad;
+    if (pEn !== null) pts += pEn * pesos.actividad;
     if (resp.ninos === "convive_siempre") {
-      if (raza.ninos === "muy_recomendado") pts += PESOS.ninos;
-      else if (raza.ninos === "recomendado") pts += PESOS.ninos * 0.6;
-      else if (raza.ninos === "poco_recomendado") pts -= PESOS.ninos * 0.5;
-      else if (raza.ninos === "no_recomendado") pts -= PESOS.ninos * 1.5;
+      if (raza.ninos === "muy_recomendado") pts += pesos.ninos;
+      else if (raza.ninos === "recomendado") pts += pesos.ninos * 0.6;
+      else if (raza.ninos === "poco_recomendado") pts -= pesos.ninos * 0.5;
+      else if (raza.ninos === "no_recomendado") pts -= pesos.ninos * 1.5;
     } else if (resp.ninos === "alguna_visita") {
-      if (raza.ninos === "muy_recomendado" || raza.ninos === "recomendado") pts += PESOS.ninos * 0.7;
-      else if (raza.ninos === "no_recomendado") pts -= PESOS.ninos * 0.5;
-      else pts += PESOS.ninos * 0.3;
+      if (raza.ninos === "muy_recomendado" || raza.ninos === "recomendado") pts += pesos.ninos * 0.7;
+      else if (raza.ninos === "no_recomendado") pts -= pesos.ninos * 0.5;
+      else pts += pesos.ninos * 0.3;
     } else {
-      pts += PESOS.ninos * 0.3;
+      pts += pesos.ninos * 0.3;
     }
-    if (resp.temperamento === "amistoso") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "muy_sociable", raza.sociabilidad); if (p !== null) pts += p * PESOS.temperamento; }
-    else if (resp.temperamento === "independiente") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "reservado", raza.sociabilidad); if (p !== null) pts += p * PESOS.temperamento; }
-    else if (resp.temperamento === "protector") { const p = puntajeEscala(ESCALA_PROTECCION, "comparte_mucho", raza.proteccion); if (p !== null) pts += p * PESOS.temperamento; }
-    else if (resp.temperamento === "timido") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "poco_sociable", raza.sociabilidad); if (p !== null) pts += p * PESOS.temperamento; }
+    if (resp.temperamento === "amistoso") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "muy_sociable", raza.sociabilidad); if (p !== null) pts += p * pesos.temperamento; }
+    else if (resp.temperamento === "independiente") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "reservado", raza.sociabilidad); if (p !== null) pts += p * pesos.temperamento; }
+    else if (resp.temperamento === "protector") { const p = puntajeEscala(ESCALA_PROTECCION, "comparte_mucho", raza.proteccion); if (p !== null) pts += p * pesos.temperamento; }
+    else if (resp.temperamento === "timido") { const p = puntajeEscala(ESCALA_SOCIABILIDAD, "poco_sociable", raza.sociabilidad); if (p !== null) pts += p * pesos.temperamento; }
     const pAd = puntajeEscala(ESCALA_ENTRENAMIENTO, resp.entrenamiento, raza.entrenamiento);
-    if (pAd !== null) pts += pAd * PESOS.entrenamiento;
+    if (pAd !== null) pts += pAd * pesos.entrenamiento;
     if (resp.tuvo_perro === "primerizo") {
-      if (raza.entrenamiento === "muy_alto") pts -= PESOS.tuvo_perro * 2;
-      else if (raza.entrenamiento === "alto") pts -= PESOS.tuvo_perro;
-      else pts += PESOS.tuvo_perro * 0.5;
-    } else { pts += PESOS.tuvo_perro * 0.5; }
+      if (raza.entrenamiento === "muy_alto") pts -= pesos.tuvo_perro * 2;
+      else if (raza.entrenamiento === "alto") pts -= pesos.tuvo_perro;
+      else pts += pesos.tuvo_perro * 0.5;
+    } else { pts += pesos.tuvo_perro * 0.5; }
     const pAs = puntajeEscala(ESCALA_ASEO, resp.aseo, raza.aseo);
-    if (pAs !== null) pts += pAs * PESOS.aseo;
+    if (pAs !== null) pts += pAs * pesos.aseo;
     if (resp.salud !== NO_IMPORTA) {
-      if (resp.salud === "bajo") { const p = puntajeEscala(ESCALA_MUDA, "sin_muda", raza.mudaPelo); if (p !== null) pts += p * PESOS.salud; }
-      else if (resp.salud === "alto") { pts += PESOS.salud * 0.5; }
-      else { const p = puntajeEscala(ESCALA_MUDA, "media", raza.mudaPelo); if (p !== null) pts += p * PESOS.salud; }
+      if (resp.salud === "bajo") { const p = puntajeEscala(ESCALA_MUDA, "sin_muda", raza.mudaPelo); if (p !== null) pts += p * pesos.salud; }
+      else if (resp.salud === "alto") { pts += pesos.salud * 0.5; }
+      else { const p = puntajeEscala(ESCALA_MUDA, "media", raza.mudaPelo); if (p !== null) pts += p * pesos.salud; }
     }
     if (resp.otros_perros === "si") {
-      if (raza.otrasMascotas === "muy_recomendado") pts += PESOS.otros_perros;
-      else if (raza.otrasMascotas === "recomendado") pts += PESOS.otros_perros * 0.6;
-      else if (raza.otrasMascotas === "no_recomendado") pts -= PESOS.otros_perros * 1.5;
-      else if (raza.otrasMascotas === "poco_recomendado") pts -= PESOS.otros_perros * 0.5;
+      if (raza.otrasMascotas === "muy_recomendado") pts += pesos.otros_perros;
+      else if (raza.otrasMascotas === "recomendado") pts += pesos.otros_perros * 0.6;
+      else if (raza.otrasMascotas === "no_recomendado") pts -= pesos.otros_perros * 1.5;
+      else if (raza.otrasMascotas === "poco_recomendado") pts -= pesos.otros_perros * 0.5;
     }
     if (resp.vivienda !== NO_IMPORTA) {
-      if (resp.vivienda === "piso" && (raza.tamano === "grande" || raza.tamano === "muy_grande")) pts -= PESOS.vivienda * 0.75;
-      if (resp.vivienda === "piso" && raza.energia === "muy_alto") pts -= PESOS.vivienda * 0.5;
-      if (raza.vivienda === resp.vivienda) pts += PESOS.vivienda;
-      else if (raza.vivienda === "indiferente") pts += PESOS.vivienda * 0.6;
-      else { const p = puntajeEscala(["piso", "piso_con_terraza", "casa_con_jardin"], resp.vivienda, raza.vivienda); if (p !== null) pts += p * PESOS.vivienda * 0.5; }
+      if (resp.vivienda === "piso" && (raza.tamano === "grande" || raza.tamano === "muy_grande")) pts -= pesos.vivienda * 0.75;
+      if (resp.vivienda === "piso" && raza.energia === "muy_alto") pts -= pesos.vivienda * 0.5;
+      if (raza.vivienda === resp.vivienda) pts += pesos.vivienda;
+      else if (raza.vivienda === "indiferente") pts += pesos.vivienda * 0.6;
+      else { const p = puntajeEscala(["piso", "piso_con_terraza", "casa_con_jardin"], resp.vivienda, raza.vivienda); if (p !== null) pts += p * pesos.vivienda * 0.5; }
     }
     const pLad = puntajeEscala(ESCALA_LADRIDOS, resp.ladridos, raza.ladridos);
-    if (pLad !== null) pts += pLad * PESOS.ladridos;
+    if (pLad !== null) pts += pLad * pesos.ladridos;
     const pMuda = puntajeEscala(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo);
-    if (pMuda !== null) pts += pMuda * PESOS.mudaPelo;
+    if (pMuda !== null) pts += pMuda * pesos.mudaPelo;
     if (resp.alergenico === "si") {
-      if (raza.mudaPelo === "sin_muda") pts += PESOS.alergenico;
-      else if (raza.mudaPelo === "baja") pts += PESOS.alergenico * 0.6;
-      else if (raza.mudaPelo === "alta") pts -= PESOS.alergenico * 0.75;
+      if (raza.mudaPelo === "sin_muda") pts += pesos.alergenico;
+      else if (raza.mudaPelo === "baja") pts += pesos.alergenico * 0.6;
+      else if (raza.mudaPelo === "alta") pts -= pesos.alergenico * 0.75;
     }
     if (RAZAS_DESTACADAS.has(raza.nombre) && pts > 0) {
       pts *= BOOST_DESTACADAS;
@@ -1261,6 +1343,22 @@ const PREGUNTAS = [
       },
     ],
   },
+  {
+  seccion: "Características del perro",
+  seccionCorta: "Prioridades",
+  key: "prioridades",
+  tipo: "orden",
+  titulo: "¿Qué es más importante para ti?",
+  desc: "Ordena las cualidades de tu perro ideal según su importancia.",
+  items: [
+    { key: "entrenamiento", label: "Facilidad de aprendizaje" },
+    { key: "actividadPersona", label: "Nivel de energía" },
+    { key: "mudaPelo", label: "Nivel de muda" },
+    { key: "aseo", label: "Frecuencia de aseo" },
+    { key: "ladridos", label: "Nivel de ladridos" },
+    { key: "tamano", label: "Tamaño" },
+  ],
+},
 
 ];
 
@@ -1524,32 +1622,40 @@ export default function TestPerroIdeal() {
             <div style={S.qBadge}>{pregunta.seccionCorta || pregunta.seccion} · Pregunta {step + 1} de {PREGUNTAS.length}</div>
             <h2 style={S.qTitle}>{pregunta.titulo}</h2>
             <p style={S.qDesc}>{pregunta.desc}</p>
-            <div style={S.optsGrid(pregunta.cols)}>
-              {pregunta.opciones.map((op, idx) => {
-                const sel = respuestas[pregunta.key] === op.value;
-                const hov = hovered === `${step}-${idx}`;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => seleccionar(op.value)}
-                    onMouseEnter={() => setHovered(`${step}-${idx}`)}
-                    onMouseLeave={() => setHovered(null)}
-                    style={{ ...S.optBtn(sel), ...(hov && !sel ? { borderColor: C.navy, background: C.navyLight } : {}) }}
-                  >
-                    {pregunta.hasIcon && op.icon && <div style={S.optIconWrap}>{op.icon}</div>}
-                    {!pregunta.hasIcon && (
-                      <div style={S.optRadio(sel)}>
-                        {sel && <svg viewBox="0 0 12 12" width="8" height="8"><circle cx="6" cy="6" r="3.5" fill="white" /></svg>}
-                      </div>
-                    )}
-                    <div>
-                      <span style={S.optLabel}>{op.label}</span>
-                      {op.sub && <span style={S.optSub}>{op.sub}</span>}
-                    </div>
-                  </button>
-                );
-              })}
+            {pregunta.tipo === "orden" ? (
+  <RankingQuestion
+    pregunta={pregunta}
+    valorInicial={respuestas[pregunta.key]}
+    onConfirmar={(orden) => seleccionar(orden)}
+  />
+) : (
+  <div style={S.optsGrid(pregunta.cols)}>
+    {pregunta.opciones.map((op, idx) => {
+      const sel = respuestas[pregunta.key] === op.value;
+      const hov = hovered === `${step}-${idx}`;
+      return (
+        <button
+          key={idx}
+          onClick={() => seleccionar(op.value)}
+          onMouseEnter={() => setHovered(`${step}-${idx}`)}
+          onMouseLeave={() => setHovered(null)}
+          style={{ ...S.optBtn(sel), ...(hov && !sel ? { borderColor: C.navy, background: C.navyLight } : {}) }}
+        >
+          {pregunta.hasIcon && op.icon && <div style={S.optIconWrap}>{op.icon}</div>}
+          {!pregunta.hasIcon && (
+            <div style={S.optRadio(sel)}>
+              {sel && <svg viewBox="0 0 12 12" width="8" height="8"><circle cx="6" cy="6" r="3.5" fill="white" /></svg>}
             </div>
+          )}
+          <div>
+            <span style={S.optLabel}>{op.label}</span>
+            {op.sub && <span style={S.optSub}>{op.sub}</span>}
+          </div>
+        </button>
+      );
+    })}
+  </div>
+)}
           </div>
           <div style={S.qAside}>
             <div style={{ textAlign: "center", marginBottom: 8 }}>
