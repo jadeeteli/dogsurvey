@@ -1216,164 +1216,90 @@ const PREGUNTAS = [
     ],
   },
 
-   // ─── BLOQUE 2 · Características del perro ──────────────────────────────
-  {
-    seccion: "Características del perro",
-    seccionCorta: "Características",
-    key: "tamano",
-    titulo: "¿Qué tamaño de perro encaja mejor en tu vida?",
-    hasIcon: true,
-    cols: 3,
-    opciones: [
-      { label: "Miniatura", sub: "Menos de 4 kg", value: "pequeño", icon: <DogSizeIllustration size="mini" /> },
-      { label: "Mini", sub: "De 4 a 10 kg", value: "pequeño", icon: <DogSizeIllustration size="pequeno" /> },
-      { label: "Mediano", sub: "De 11 a 25 kg", value: "mediano", icon: <DogSizeIllustration size="mediano" /> },
-      { label: "Maxi", sub: "De 26 a 44 kg", value: "grande", icon: <DogSizeIllustration size="grande" /> },
-      { label: "Gigante", sub: "Más de 45 kg", value: "muy_grande", icon: <DogSizeIllustration size="muygrande" /> },
-      { label: "No importa", sub: "Cualquier tamaño", value: NO_IMPORTA, icon: <DogSizeIllustration size="noImporta" /> },
-    ],
-  },
-
-  {
-    seccion: "Características del perro",
-    seccionCorta: "Características",
-    key: "actividadPersona",
-    titulo: "¿Qué nivel de energía buscas en tu perro?",
-    desc: "Algunas razas disfrutan de una vida muy activa mientras que otras prefieren un ritmo más tranquilo.",
-    hasIcon: false,
-    cols: 1,
-    opciones: [
-      {
-        label: "Tranquilo",
-        sub: "Paseos relajados y vida calmada",
-        value: "bajo",
-        icon: <ActivityIcon level="bajo" />,
-      },
-      {
-        label: "Moderado",
-        sub: "Un equilibrio entre actividad y descanso",
-        value: "medio",
-        icon: <ActivityIcon level="medio" />,
-      },
-      {
-        label: "Muy activo",
-        sub: "Deporte, excursiones y mucha actividad",
-        value: "alto",
-        icon: <ActivityIcon level="alto" />,
-      },
-    ],
-  },
-
-
-  {
-    seccion: "Características del perro",
-    seccionCorta: "Cuidados",
-    key: "entrenamiento",
-    titulo: "¿Qué facilidad de aprendizaje buscas en tu perro?",
-    desc: "Algunas razas aprenden con mucha facilidad mientras que otras requieren un enfoque más paciente.",
-    hasIcon: false,
-    cols: 1,
-    opciones: [
-      {
-        label: "Alta",
-        sub: "Disfruta aprendiendo constantemente",
-        value: "muy_alto",
-      },
-      {
-        label: "Media",
-        sub: "Aprende con práctica y constancia",
-        value: "alto",
-      },
-      {
-        label: "Normal",
-        sub: "Aprendizaje equilibrado",
-        value: "normal",
-      },
-      {
-        label: "Baja",
-        sub: "Más independiente",
-        value: "bajo",
-      },
-    ],
-  },
-
-  {
-    seccion: "Características del perro",
-    seccionCorta: "Cuidados",
-    key: "ladridos",
-    titulo: "¿Qué nivel de ladridos prefieres?",
-    desc: "Algunas razas son más comunicativas que otras.",
-    hasIcon: false,
-    cols: 1,
-    opciones: [
-      {
-        label: "Pocos ladridos",
-        sub: "Prefiero un perro tranquilo",
-        value: "bajo",
-      },
-      {
-        label: "Nivel medio",
-        sub: "Algún ladrido ocasional",
-        value: "medio",
-      },
-      {
-        label: "No me importa",
-        sub: "Puede ser bastante comunicativo",
-        value: "alto",
-      },
-    ],
-  },
-
-  {
-    seccion: "Características del perro",
-    seccionCorta: "Cuidados",
-    key: "aseo",
-    titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
-    desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados.",
-    hasIcon: false,
-    cols: 1,
-    opciones: [
-      {
-        label: "Lo esencial",
-        sub: "Cuidados sencillos",
-        value: "mensual",
-      },
-      {
-        label: "De vez en cuando",
-        sub: "Cepillado semanal",
-        value: "semanal",
-      },
-      {
-        label: "Con frecuencia",
-        sub: "Cepillado frecuente",
-        value: "frecuente",
-      },
-      {
-        label: "Todo lo necesario",
-        sub: "Estoy dispuesto a dedicarle todo el tiempo que necesite",
-        value: "diario",
-      },
-    ],
-  },
-  {
+   // ─── Características del perro (queda tamaño y aseo) ──────────────────────
+{
   seccion: "Características del perro",
-  seccionCorta: "Prioridades",
-  key: "prioridades",
-  tipo: "orden",
-  titulo: "¿Qué es más importante para ti?",
-  desc: "Ordena las cualidades de tu perro ideal según su importancia.",
-  items: [
-    { key: "entrenamiento", label: "Facilidad de aprendizaje" },
-    { key: "actividadPersona", label: "Nivel de energía" },
-    { key: "aseo", label: "Frecuencia de aseo" },
-    { key: "ladridos", label: "Nivel de ladridos" },
-    { key: "tamano", label: "Tamaño" },
+  seccionCorta: "Características",
+  key: "tamano",
+  titulo: "¿Qué tamaño de perro encaja mejor en tu vida?",
+  hasIcon: true,
+  cols: 3,
+  opciones: [
+    { label: "Miniatura", sub: "Menos de 4 kg", value: "pequeño", icon: <DogSizeIllustration size="mini" /> },
+    { label: "Mini", sub: "De 4 a 10 kg", value: "pequeño", icon: <DogSizeIllustration size="pequeno" /> },
+    { label: "Mediano", sub: "De 11 a 25 kg", value: "mediano", icon: <DogSizeIllustration size="mediano" /> },
+    { label: "Maxi", sub: "De 26 a 44 kg", value: "grande", icon: <DogSizeIllustration size="grande" /> },
+    { label: "Gigante", sub: "Más de 45 kg", value: "muy_grande", icon: <DogSizeIllustration size="muygrande" /> },
+    { label: "No importa", sub: "Cualquier tamaño", value: NO_IMPORTA, icon: <DogSizeIllustration size="noImporta" /> },
   ],
 },
 
+{
+  seccion: "Características del perro",
+  seccionCorta: "Cuidados",
+  key: "aseo",
+  titulo: "¿Cuánto tiempo puedes dedicar al cuidado de su pelo y sus uñas?",
+  desc: "Piensa en el tiempo, la constancia y el presupuesto que puedes destinar a sus cuidados.",
+  hasIcon: false,
+  cols: 1,
+  opciones: [
+    { label: "Lo esencial", sub: "Cuidados sencillos", value: "mensual" },
+    { label: "De vez en cuando", sub: "Cepillado semanal", value: "semanal" },
+    { label: "Con frecuencia", sub: "Cepillado frecuente", value: "frecuente" },
+    { label: "Todo lo necesario", sub: "Estoy dispuesto a dedicarle todo el tiempo que necesite", value: "diario" },
+  ],
+},
+
+// ─── Rasgos de comportamiento ───────────────────────────────────────────────
+{
+  seccion: "Rasgos de comportamiento",
+  seccionCorta: "Comportamiento",
+  key: "entrenamiento",
+  titulo: "¿Qué facilidad de aprendizaje buscas en tu perro?",
+  desc: "Algunas razas disfrutan aprendiendo y colaborando con sus personas, mientras que otras tienen un carácter más independiente y necesitan un enfoque educativo paciente y constante.",
+  hasIcon: false,
+  cols: 1,
+  opciones: [
+    { label: "Alto", sub: "Le encantará aprender y hacer actividades contigo.", value: "muy_alto" },
+    { label: "Medio", sub: "Disfrutará participando con cierta frecuencia.", value: "alto" },
+    { label: "Normal", sub: "Se adaptará a actividades sencillas y ocasionales.", value: "normal" },
+    { label: "Bajo", sub: "Preferirá una rutina tranquila y más independiente.", value: "bajo" },
+  ],
+},
+
+{
+  seccion: "Rasgos de comportamiento",
+  seccionCorta: "Comportamiento",
+  key: "actividadPersona",
+  titulo: "¿Qué nivel de energía buscas en tu perro?",
+  desc: "Algunas razas son muy activas y siempre están preparadas para correr, jugar o acompañarte en una nueva aventura. Otras prefieren los paseos tranquilos, los momentos de descanso y disfrutar de tu compañía en casa.",
+  hasIcon: false,
+  cols: 1,
+  opciones: [
+    { label: "Tranquilo", sub: "Paseos relajados y vida calmada", value: "bajo", icon: <ActivityIcon level="bajo" /> },
+    { label: "Moderado", sub: "Un equilibrio entre actividad y descanso", value: "medio", icon: <ActivityIcon level="medio" /> },
+    { label: "Muy activo", sub: "Deporte, excursiones y mucha actividad", value: "alto", icon: <ActivityIcon level="alto" /> },
+  ],
+},
+
+{
+  seccion: "Rasgos de comportamiento",
+  seccionCorta: "Comportamiento",
+  key: "ladridos",
+  titulo: "¿Te molesta que tu perro sea comunicativo?",
+  desc: "Algunas razas ladran con frecuencia ante cualquier estímulo, mientras que otras solo lo hacen en momentos concretos. Incluso las razas consideradas poco ladradoras pueden expresarse mediante otros sonidos.",
+  hasIcon: false,
+  cols: 1,
+  opciones: [
+    { label: "Muy poquito", sub: "Mejor si se hace notar sin montar un concierto.", value: "bajo" },
+    { label: "De vez en cuando", sub: "Algún ladrido está bien.", value: "medio" },
+    { label: "Bastante", sub: "No me importa que tenga muchas cosas que contar.", value: "alto" },
+    { label: "Mucho", sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
+],
+},
 ];
 
-const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro"];
+const SECCIONES = ["Cuéntanos un poco más sobre ti", "Características del perro", "Rasgos de comportamiento"];
 
 const S = {
   wrapper: { width: "100%", minHeight: "100vh", background: C.pageBg, fontFamily: "'Lato', sans-serif", color: C.text, overflowX: "hidden", boxSizing: "border-box", display: "flex", flexDirection: "column" },
