@@ -827,7 +827,6 @@ function construirFilasResultado(raza, resp) {
   return {
     Cuéntanos_un_poco_más_sobre_ti: [
       { label: "Tamaño", valor: ETIQ_TAMANO[raza.tamano] || raza.tamano, acierto: tamanoUsuarioOk },
-      { label: "Nivel de energía", valor: ETIQ_ENERGIA[raza.energia] || raza.energia, acierto: comparar(ESCALA_ENERGIA, resp.actividad, raza.energia, 0) },
     ],
     temperamento: [
       {
@@ -853,10 +852,13 @@ function construirFilasResultado(raza, resp) {
         acierto: resp.otros_perros !== "si" ? null : raza.otrasMascotas === "muy_recomendado" || raza.otrasMascotas === "recomendado",
       },
     ],
-    cuidados: [
+    comportamiento: [
+      { label: "Nivel de energía", valor: ETIQ_ENERGIA[raza.energia] || raza.energia, acierto: comparar(ESCALA_ENERGIA, resp.actividad, raza.energia, 0) },
       { label: "Necesidades educativas", valor: ETIQ_ENTRENAMIENTO[raza.entrenamiento] || raza.entrenamiento, acierto: comparar(ESCALA_ENTRENAMIENTO, resp.entrenamiento, raza.entrenamiento, 1) },
-      { label: "Cuidados de aseo y muda de pelo", valor: ETIQ_ASEO[raza.aseo] || raza.aseo, acierto: comparar(ESCALA_ASEO, resp.aseo, raza.aseo, 1) },
       { label: "Tendencia a ladrar", valor: ETIQ_LADRIDOS[raza.ladridos] || raza.ladridos, acierto: comparar(ESCALA_LADRIDOS, resp.ladridos, raza.ladridos, 0) },
+    ],
+    cuidados: [
+      { label: "Cuidados de aseo y muda de pelo", valor: ETIQ_ASEO[raza.aseo] || raza.aseo, acierto: comparar(ESCALA_ASEO, resp.aseo, raza.aseo, 1) },
       { label: "Nivel de muda de pelo", valor: ETIQ_MUDA[raza.mudaPelo] || raza.mudaPelo, acierto: comparar(ESCALA_MUDA, resp.mudaPelo, raza.mudaPelo, 0) },
       {
         label: "Nivel de cuidados veterinarios",
@@ -1295,7 +1297,23 @@ const PREGUNTAS = [
     { label: "De vez en cuando", sub: "Algún ladrido está bien.", value: "medio" },
     { label: "Bastante", sub: "No me importa que tenga muchas cosas que contar.", value: "alto" },
     { label: "Mucho", sub: "¡En casa hay sitio para una buena conversación perruna!", value: "alto" },
-],
+  ],
+},
+
+{
+  seccion: "Rasgos de comportamiento",
+  seccionCorta: "Comportamiento",
+  key: "prioridades",
+  tipo: "orden",
+  titulo: "¿Qué es más importante para ti?",
+  desc: "Ordena las cualidades de tu perro ideal según su importancia.",
+  items: [
+    { key: "entrenamiento", label: "Facilidad de aprendizaje" },
+    { key: "actividad",     label: "Nivel de energía" },
+    { key: "aseo",          label: "Frecuencia de aseo" },
+    { key: "ladridos",      label: "Nivel de ladridos" },
+    { key: "tamano",        label: "Tamaño" },
+  ],
 },
 ];
 
@@ -1650,10 +1668,11 @@ export default function TestPerroIdeal() {
     const filas = razaActual ? construirFilasResultado(razaActual, respuestas) : null;
     const descripcion = razaActual ? descripcionGenerada(razaActual, nombreFormateado) : "";
 
-  const TABS = [
-  { key: "Cuéntanos_un_poco_más_sobre_ti", label: "Cuéntanos un poco más sobre ti"},
-  { key: "cuidados", label: "Características del perro" },
-  ];
+ const TABS = [
+  { key: "Cuéntanos_un_poco_más_sobre_ti", label: "Sobre ti" },
+  { key: "cuidados", label: "Características" },
+  { key: "comportamiento", label: "Comportamiento" },
+];
 
     const IconoAcierto = ({ acierto }) => (
       <div style={S.detailIcon(acierto)}>
