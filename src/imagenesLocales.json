@@ -1,311 +1,215 @@
 {
   "AFFENPINSCHER": [
-    "affenpinscher.jpg"
+    "AFFENPINSCHER/1.jpg",
+    "AFFENPINSCHER/2.jpg",
+    "AFFENPINSCHER/3.jpg"
+  ],
+  "AIDI": [
+    "AIDI/1.jpg",
+    "AIDI/2.jpg"
   ],
   "AIREDALE TERRIER": [
-    "airedale terrier.jpg"
+    "AIREDALE TERRIER/1.jpg",
+    "AIREDALE TERRIER/2.jpg",
+    "AIREDALE TERRIER/3.jpg",
+    "AIREDALE TERRIER/4.jpg"
+  ],
+  "AKBASH SHEPHERD DOG (NO ACEPTADA FCI)*": [
+    "AKBASH SHEPHERD DOG (NO ACEPTADA FCI)*/1.jpg",
+    "AKBASH SHEPHERD DOG (NO ACEPTADA FCI)*/2.jpg"
   ],
   "AKITA AMERICANO": [
-    "akita mericano.jpg"
+    "AKITA AMERICANO/1.jpg",
+    "AKITA AMERICANO/2.jpg",
+    "AKITA AMERICANO/3.jpg"
   ],
   "AKITA": [
-    "akita.jpg"
+    "AKITA/1.jpg",
+    "AKITA/2.jpg"
+  ],
+  "AKSARAY MALAKI DOG (NO ACEPTADA FCI)*": [
+    "AKSARAY MALAKI DOG (NO ACEPTADA FCI)*/1.jpg",
+    "AKSARAY MALAKI DOG (NO ACEPTADA FCI)*/2.jpg"
   ],
   "ALANO ESPAÑOL (NO ACEPTADA FCI)": [
-    "ALANO ESPAÑOL.jpg"
+    "ALANO ESPAÑOL (NO ACEPTADA FCI)/1.jpg"
   ],
   "ALASKAN MALAMUTE": [
-    "alaskan malamute.jpg"
+    "ALASKAN MALAMUTE/1.jpg",
+    "ALASKAN MALAMUTE/2.jpg",
+    "ALASKAN MALAMUTE/3.jpg"
   ],
   "AMERICAN FOXHOUND": [
-    "american foxhound.jpg"
+    "AMERICAN FOXHOUND/1.jpg",
+    "AMERICAN FOXHOUND/2.jpg"
+  ],
+  "AMERICAN HAIRLESS TERRIER (NO ACEPTADA FCI)": [
+    "AMERICAN HAIRLESS TERRIER (NO ACEPTADA FCI)/1.jpg",
+    "AMERICAN HAIRLESS TERRIER (NO ACEPTADA FCI)/2.jpg",
+    "AMERICAN HAIRLESS TERRIER (NO ACEPTADA FCI)/3.jpg"
   ],
   "AMERICAN STAFFORDSHIRE TERRIER": [
-    "american staffordshire terrier.jpg"
+    "AMERICAN STAFFORDSHIRE TERRIER/1.jpg",
+    "AMERICAN STAFFORDSHIRE TERRIER/2.jpg"
   ],
-  "ANTIGUO PERRO DE PASTOR INGLES": [
-    "antiguo perro de pastor ingles.jpg"
+  "ARIEGEOIS": [
+    "ARIEGEOIS/1.jpg",
+    "ARIEGEOIS/2.jpg"
   ],
   "AUSTRALIAN CATTLE DOG": [
-    "australian cattle dog.jpg"
+    "AUSTRALIAN CATTLE DOG/1.jpg",
+    "AUSTRALIAN CATTLE DOG/2.jpg"
+  ],
+  "AUSTRALIAN STUMPY TAIL CATTLE DOG (PROV. ACEP.FCI.)": [
+    "AUSTRALIAN STUMPY TAIL CATTLE DOG (PROV. ACEP.FCI.)/1.jpg",
+    "AUSTRALIAN STUMPY TAIL CATTLE DOG (PROV. ACEP.FCI.)/2.jpg"
   ],
   "AUSTRALIAN TERRIER": [
-    "australian terrier.jpg"
+    "AUSTRALIAN TERRIER/1.jpg",
+    "AUSTRALIAN TERRIER/2.jpg",
+    "AUSTRALIAN TERRIER/3.jpg"
   ],
   "AZAWAKH": [
-    "azawak.jpg"
+    "AZAWAKH/1.jpg",
+    "AZAWAKH/2.jpg"
+  ],
+  "BARBADO DA TERCEIRA (NO ACEPTADA FCI)": [
+    "BARBADO DA TERCEIRA (NO ACEPTADA FCI)/1.jpg",
+    "BARBADO DA TERCEIRA (NO ACEPTADA FCI)/2.jpg"
+  ],
+  "BARBET": [
+    "BARBET/1.jpg",
+    "BARBET/2.jpg"
   ],
   "BASENJI": [
-    "basenji.jpg"
+    "BASENJI/1.jpg",
+    "BASENJI/2.jpg",
+    "BASENJI/3.jpg"
+  ],
+  "BASSET ARTESIEN NORMAND": [
+    "BASSET ARTESIEN NORMAND/1.jpg"
+  ],
+  "BASSET AZUL DE GASCUÑA": [
+    "BASSET AZUL DE GASCUÑA/1.jpg",
+    "BASSET AZUL DE GASCUÑA/2.jpg"
+  ],
+  "BASSET D'ARTOIS": [
+    "BASSET D'ARTOIS/1.jpg"
   ],
   "BASSET FAUVE DE BRETAGNE": [
-    "basset feuve de bretagne.jpg"
-  ],
-  "BASSET HOUND": [
-    "basset hound.jpg"
+    "BASSET FAUVE DE BRETAGNE/1.jpg",
+    "BASSET FAUVE DE BRETAGNE/2.jpg"
   ],
   "BEAGLE": [
-    "beagle.jpg"
+    "BEAGLE/1.jpg",
+    "BEAGLE/2.jpg",
+    "BEAGLE/3.jpg",
+    "BEAGLE/4.jpg"
+  ],
+  "BEAGLE-HARRIER": [
+    "BEAGLE-HARRIER/1.jpg",
+    "BEAGLE-HARRIER/2.jpg"
   ],
   "BEARDED COLLIE": [
-    "bearded collie.jpg"
+    "BEARDED COLLIE/1.jpg",
+    "BEARDED COLLIE/2.jpg",
+    "BEARDED COLLIE/3.jpg"
   ],
   "BEDLINGTON TERRIER": [
-    "bedlington terrier.jpg"
+    "BEDLINGTON TERRIER/1.jpeg",
+    "BEDLINGTON TERRIER/2.jpeg",
+    "BEDLINGTON TERRIER/3.jpg"
   ],
   "BICHON BOLOÑES": [
-    "bichon boloñes.jpg"
+    "BICHON BOLOÑES/1.jpg",
+    "BICHON BOLOÑES/2.jpg"
   ],
   "BICHON FRISE": [
-    "bichon frise.jpg"
+    "BICHON FRISE/1.jpg",
+    "BICHON FRISE/2.jpg",
+    "BICHON FRISE/3.jpg"
+  ],
+  "BICHON HABANERO": [
+    "BICHON HABANERO/1.jpg",
+    "BICHON HABANERO/2.jpg",
+    "BICHON HABANERO/3.jpg"
+  ],
+  "BICHON MALTES": [
+    "BICHON MALTES/1.jpg",
+    "BICHON MALTES/2.jpg",
+    "BICHON MALTES/3.jpg"
+  ],
+  "BIEWER TERRIER (NO ACEPTADA FCI)": [
+    "BIEWER TERRIER (NO ACEPTADA FCI)/1.jpg",
+    "BIEWER TERRIER (NO ACEPTADA FCI)/2.jpg",
+    "BIEWER TERRIER (NO ACEPTADA FCI)/3.jpg"
+  ],
+  "BILLY": [
+    "BILLY/1.jpg"
+  ],
+  "BLACK AND TAN COONHOUND": [
+    "BLACK AND TAN COONHOUND/1.jpg",
+    "BLACK AND TAN COONHOUND/2.jpg",
+    "BLACK AND TAN COONHOUND/3.jpg"
+  ],
+  "ANTIGUO PERRO DE PASTOR INGLES": [
+    "ANTIGUO PERRO DE PASTOR INGLES/1.jpg",
+    "ANTIGUO PERRO DE PASTOR INGLES/2.jpg",
+    "ANTIGUO PERRO DE PASTOR INGLES/3.jpg"
+  ],
+  "BORDER COLLIE": [
+    "BORDER COLLIE/1.jpg",
+    "BORDER COLLIE/2.jpg",
+    "BORDER COLLIE/3.jpg"
+  ],
+  "BORDER TERRIER": [
+    "BORDER TERRIER/1.jpg",
+    "BORDER TERRIER/2.jpg",
+    "BORDER TERRIER/3.jpg"
+  ],
+  "BORZOI": [
+    "BORZOI/1.jpg",
+    "BORZOI/2.png",
+    "BORZOI/3.jpg",
+    "BORZOI/4.jpg",
+    "BORZOI/5.jpg"
   ],
   "BOSTON TERRIER": [
-    "boston terrier.jpg"
+    "BOSTON TERRIER/1.jpg",
+    "BOSTON TERRIER/2.jpg"
   ],
   "BOUVIER BERNOIS": [
-    "bouvier bernois.jpg"
+    "BOUVIER BERNOIS/1.jpg",
+    "BOUVIER BERNOIS/2.jpg",
+    "BOUVIER BERNOIS/3.jpg"
+  ],
+  "BOUVIER D'APPENZELL": [
+    "BOUVIER D'APPENZELL/1.jpg",
+    "BOUVIER D'APPENZELL/2.jpg"
   ],
   "BOUVIER DE FLANDES": [
-    "bouvier de flandes.jpg"
+    "BOUVIER DE FLANDES/1.jpg",
+    "BOUVIER DE FLANDES/2.jpg"
+  ],
+  "BOUVIER DE L'ENTLEBUCH": [
+    "BOUVIER DE L'ENTLEBUCH/1.jpg",
+    "BOUVIER DE L'ENTLEBUCH/2.jpg"
+  ],
+  "BOUVIER DES ARDENNES": [
+    "BOUVIER DES ARDENNES/1.jpg"
   ],
   "BOXER": [
-    "boxer.jpg"
+    "BOXER/1.jpg",
+    "BOXER/2.jpg"
   ],
   "BRACO ALEMAN": [
-    "braco aleman.jpg"
+    "BRACO ALEMAN/1.jpg",
+    "BRACO ALEMAN/2.jpg"
   ],
   "BRACO DE WEIMAR": [
-    "braco de weimar.jpg"
+    "BRACO DE WEIMAR/1.jpg"
   ],
-  "BULL TERRIER MINIATURA": [
-    "bull terrier miniatura.jpg"
-  ],
-  "BULL TERRIER": [
-    "bull terrier.jpg"
-  ],
-  "BULLDOG FRANCES": [
-    "bulldog frances.jpg"
-  ],
-  "BULLDOG INGLES": [
-    "bulldog ingles.jpg"
-  ],
-  "BULLMASTIFF": [
-    "bullmastiff.jpg"
-  ],
-  "AFGAN HOUND": [
-    "galgo afgano.jpg"
-  ],
-  "GALGO ESPAÑOL": [
-    "GALGO_ESPAÑOL (3).jpg",
-    "GALGO_ESPAÑOL (4).jpg",
-    "GALGO_ESPAÑOL (5).jpg",
-    "GALGO_ESPAÑOL (6).jpg"
-  ],
-  "LABRADOR RETRIEVER": [
-    "labrador retriever.jpg"
-  ],
-  "LAKELAND TERRIER": [
-    "lakeland terrier.jpg"
-  ],
-  "LEONBERGER": [
-    "leonberger.jpg"
-  ],
-  "LHASA APSO": [
-    "lhasa apso.jpg"
-  ],
-  "MAJORERO (NO ACEPTADA FCI)": [
-    "MAJORERO (1).jpg",
-    "MAJORERO (2).jpg",
-    "MAJORERO (3).jpg"
-  ],
-  "MANETO (NO ACEPTADA FCI)": [
-    "MANETO (1).jpg",
-    "MANETO (2).jpg",
-    "MANETO (3).jpg"
-  ],
-  "MASTIFF": [
-    "mastiff.jpg"
-  ],
-  "MASTIN NAPOLITANO": [
-    "mastin napolitano.jpg"
-  ],
-  "MASTIN DEL PIRINEO": [
-    "MASTIN_DEL_PIRINEO (1).jpg",
-    "MASTIN_DEL_PIRINEO (2).jpg",
-    "MASTIN_DEL_PIRINEO (3).jpg",
-    "MASTIN_DEL_PIRINEO (4).jpg",
-    "MASTIN_DEL_PIRINEO (5).jpg",
-    "MASTIN_DEL_PIRINEO (6).jpg"
-  ],
-  "MASTIN ESPAÑOL": [
-    "MASTIN_ESPAÑOL (1).jpg",
-    "MASTIN_ESPAÑOL (2).jpg",
-    "MASTIN_ESPAÑOL (3).jpg",
-    "MASTIN_ESPAÑOL (4).jpg",
-    "MASTIN_ESPAÑOL (5).jpg"
-  ],
-  "NORFOLK TERRIER": [
-    "norfolk terrier.jpg"
-  ],
-  "NORWICH TERRIER": [
-    "norwich terrier.jpg"
-  ],
-  "PACHON NAVARRO (NO ACEPTADA FCI)": [
-    "PACHON_NAVARRO (1).jpg",
-    "PACHON_NAVARRO (2).jpg",
-    "PACHON_NAVARRO (3).jpg"
-  ],
-  "PARSON RUSSELL TERRIER": [
-    "PARSON_RUSSELL_TERRIER.jpg",
-    "PARSON_RUSSELL_TERRIER1.jpg"
-  ],
-  "PERRO DE PASTOR ALEMAN": [
-    "PASTOR_ALEMAN.jpg",
-    "PASTOR_ALEMAN1.jpg"
-  ],
-  "PERRO DE PASTOR GARAFIANO (NO ACEPTADA FCI)": [
-    "pastor_garafiano (1).jpg",
-    "pastor_garafiano (2).jpg",
-    "pastor_garafiano (3).jpg",
-    "pastor_garafiano (4).jpg"
-  ],
-  "PASTOR MINIATURA AMERICANO (PROV. ACEP. FCI.)": [
-    "PASTOR_MINIATURA_AMERICANO.jpg",
-    "PASTOR_MINIATURA_AMERICANO1.jpg"
-  ],
-  "PEKINES": [
-    "PEKINES.jpg",
-    "PEKINES1.jpg"
-  ],
-  "PEQUEÑO LEBREL ITALIANO": [
-    "PEQUEÑO_LEBREL_ITALIANO.jpg"
-  ],
-  "PEQUEÑO PERRO RUSO (RUSSKIY TOY)": [
-    "PEQUEÑO_PERRO_RUSO.jpg",
-    "PEQUEÑO_PERRO_RUSO1.jpg"
-  ],
-  "PEQUEÑO SABUESO AZUL DE GASCUÑA": [
-    "PEQUEÑO_SABUESO_AZUL_DEGASCUÑA.jpg"
-  ],
-  "PERRO DE AGUA PORTUGUES": [
-    "PERRO_AGUA_PORTUGUES.jpg",
-    "PERRO_AGUA_PORTUGUES1.jpg"
-  ],
-  "PERRO FINLANDES DE LAPONIA": [
-    "PERRO_FINLANDES_LAPONIA.jpg",
-    "PERRO_FINLANDES_LAPONIA1.jpg"
-  ],
-  "PERRO LOBO DE SAARLOOS": [
-    "PERRO_LOBO_SAARLOS.jpg",
-    "PERRO_LOBO_SAARLOS1.jpg"
-  ],
-  "PERRO DE MONTAÑA DE LOS PIRINEOS": [
-    "PERRO_MONTAÑA_PIRINEOS.jpg",
-    "PERRO_MONTAÑA_PIRINEOS1.jpg"
-  ],
-  "PERRO DE OSOS DE CARELIA": [
-    "PERRO_OSOS_CARELIA.jpg",
-    "PERRO_OSOS_CARELIA1.jpg"
-  ],
-  "PERRO DE PASTOR DE ASIA CENTRAL": [
-    "PERRO_PASTOR_ASIA_CENTRAL.jpg",
-    "PERRO_PASTOR_ASIA_CENTRAL1.jpg"
-  ],
-  "PERRO DE PASTOR AUSTRALIANO": [
-    "PERRO_PASTOR_AUSTRALIANO.jpg",
-    "PERRO_PASTOR_AUSTRALIANO1.jpg"
-  ],
-  "PERRO DE PASTOR BELGA": [
-    "PERRO_PASTOR_BELGA.jpg",
-    "PERRO_PASTOR_BELGA1.jpg"
-  ],
-  "PERRO DE PASTOR BLANCO SUIZO": [
-    "PERRO_PASTOR_BLANCO_SUIZO.jpg",
-    "PERRO_PASTOR_BLANCO_SIEZO1.jpg"
-  ],
-  "PERRO DE PASTOR DE BRIE": [
-    "PERRO_PASTOR_BRIE.jpg",
-    "PERRO_PASTOR_BRIE1.jpg"
-  ],
-  "PERRO DE PASTOR DEL CAUCASO": [
-    "PERRO_PASTOR_CAUCASO.jpg",
-    "PERRO_PASTOR_CAUCASO1.jpg"
-  ],
-  "PERRO LOBO CHECOSLOVACO": [
-    "PERRO_PASTOR_CHECOSLOVACO.jpg",
-    "PERRO_PASTOR_CHECOSLOVACO1.jpg"
-  ],
-  "PERRO DE PASTOR HOLANDES": [
-    "PERRO_PASTOR_HOLANDES.jpg",
-    "PERRO_PASTOR_HOLANDES1.jpg"
-  ],
-  "PERRO DE PASTOR KANGAL": [
-    "PERRO_PASTOR_KANGAL.jpg",
-    "PERRO_PASTOR_KANGAL1.jpg"
-  ],
-  "PERRO PASTOR DE LOS PIRINEOS DE PELO LARGO": [
-    "PERRO_PASTOR_PIRINEOS_PELOLARGO.jpg",
-    "PERRO_PASTOR_PIRINEOS_PELOLARGO1.jpg"
-  ],
-  "PERRO SIN PELO DEL PERU": [
-    "PERRO_SIN_PELO_PERU.jpg",
-    "PERRO_SIN_PELO_PERU1.jpg"
-  ],
-  "PETIT BASSET GRIFFON VENDEEN": [
-    "PETIT_BASSET_GRIFFON_VENDEEN.jpg",
-    "PETIT_BASSET_GRIFFON_VENDEEN1.jpg"
-  ],
-  "PETIT BRABANÇON": [
-    "PETIT_BRABAÇON.jpg",
-    "PETIT_BRABAÇON1.jpg"
-  ],
-  "PINSCHER": [
-    "PINSCHER.jpg",
-    "PINSCHER1.jpg"
-  ],
-  "PODENCO CANARIO": [
-    "Podenco_Canario-web.jpg"
-  ],
-  "PODENCO PORTUGUES": [
-    "PODENCO_PORTUGUES.jpg"
-  ],
-  "POINTER": [
-    "POINTER.jpg",
-    "POINTER1.jpg"
-  ],
-  "PORCELAINE": [
-    "PORCELAINE.jpg",
-    "PORCELAINE1.jpg"
-  ],
-  "PULI": [
-    "PULI.jpg",
-    "PULI1.jpg"
-  ],
-  "RHODESIAN RIDGEBACK": [
-    "RHODESIAN_RIDGEBACK.jpg",
-    "RHODESIAN_RIDGEBACK-1.jpg"
-  ],
-  "ROTTWEILER": [
-    "ROTTWEILER.jpg",
-    "ROTTWEILER-1.jpg"
-  ],
-  "PERRO DE PASTOR ESCOCES (ROUGH COLLIE)": [
-    "ROUGH_COLLIE.jpg",
-    "ROUGH_COLLIE1.jpg"
-  ],
-  "SABUESO ESLOVACO": [
-    "SABUESO_ESLOVACO.jpg",
-    "SABUESO_ESLOVACO-1.jpg"
-  ],
-  "SABUESO SUIZO PEQUEÑO": [
-    "SABUESO_SUIZO_PEQUEÑO.jpg",
-    "SABUESO_SUIZO_PEQUEÑO-1.jpg"
-  ],
-  "SALUKI": [
-    "SALUKI.jpg",
-    "SALUKI-1.jpg"
-  ],
-  "SAMOYEDO": [
-    "SAMOYEDO-1.jpg"
+  "BRACO DEL ARIEGE": [
+    "BRACO DEL ARIEGE/1.jpg"
   ]
 }
