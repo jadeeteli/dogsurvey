@@ -1352,7 +1352,7 @@ const PREGUNTAS = [
   desc: "Ordena las cualidades de tu perro ideal según su importancia.",
   items: [
     { key: "entrenamiento", label: "Facilidad de aprendizaje" },
-    { key: "mudaPelo", label: "Nivel de muda" },
+    { key: "actividadPersona", label: "Nivel de energía" },
     { key: "aseo", label: "Frecuencia de aseo" },
     { key: "ladridos", label: "Nivel de ladridos" },
     { key: "tamano", label: "Tamaño" },
