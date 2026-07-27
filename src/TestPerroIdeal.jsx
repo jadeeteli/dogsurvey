@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import razas from "./razas.json";
 import imagenesLocales from "./imagenesLocales.json";
+import popularidadEspana from "./popularidadEspana.json";
 const LANDING_BREEDS = ["Labrador Retriever", "Pastor Alemán", "Bulldog Francés", "Caniche"];
 
 
@@ -756,6 +757,13 @@ const RAZAS_DESTACADAS = new Set([
 
 const BOOST_DESTACADAS = 1.12;
 
+const BOOST_POPULARIDAD = {
+  1: 1.15,
+  2: 1.08,
+  3: 1.00,
+  4: 0.93,
+};
+
 const ETIQ_TAMANO = {
   pequeño: "Mini / pequeño", mediano: "Mediano", grande: "Grande",
   muy_grande: "Gigante", indiferente: "Cualquier tamaño",
@@ -1043,6 +1051,10 @@ function calcularResultado(resp) {
     }
     if (RAZAS_DESTACADAS.has(raza.nombre) && pts > 0) {
       pts *= BOOST_DESTACADAS;
+      const nivelPopularidad = popularidadEspana[raza.nombre];
+    if (nivelPopularidad && pts > 0) {
+      pts *= BOOST_POPULARIDAD[nivelPopularidad] ?? 1;
+    }
     }
     return { nombre: raza.nombre, pts, pct: maxPts > 0 ? Math.max(0, (pts / maxPts) * 100) : 0 };
   });
